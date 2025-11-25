@@ -6,9 +6,41 @@
 const BlogModule = (function () {
     // Configuration
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTjaqBX7gq1Mg0lxaLyw5rO2Bo1jbaxMveEopOadoSUxHFIlJii__6pMTaWTnDkUDeLoTivvmP_dE31/pub?gid=0&single=true&output=csv';
+    const CACHE_KEY = 'ipfo_blog_posts';
+    const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
     let allPosts = [];
     let currentFilter = 'all';
+
+    // ==========================================================================
+    // Caching Functions
+    // ==========================================================================
+
+    function getCachedData() {
+        try {
+            const cached = sessionStorage.getItem(CACHE_KEY);
+            if (!cached) return null;
+
+            const { data, timestamp } = JSON.parse(cached);
+            const isExpired = Date.now() - timestamp > CACHE_DURATION;
+
+            return isExpired ? null : data;
+        } catch (error) {
+            console.error('Cache read error:', error);
+            return null;
+        }
+    }
+
+    function setCacheData(data) {
+        try {
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+                data,
+                timestamp: Date.now()
+            }));
+        } catch (error) {
+            console.error('Cache write error:', error);
+        }
+    }
 
     // ==========================================================================
     // CSV Parsing
@@ -50,13 +82,30 @@ const BlogModule = (function () {
         const blogGrid = document.getElementById('blogGrid');
         const emptyState = document.getElementById('emptyState');
 
+        // Try to load from cache first
+        const cached = getCachedData();
+        if (cached) {
+            console.log('Loading blog posts from cache');
+            allPosts = cached;
+            displayPosts(allPosts);
+
+            if (loadingState) loadingState.style.display = 'none';
+            if (blogGrid) blogGrid.style.display = 'grid';
+            return;
+        }
+
+        // Fetch from API if no cache
         try {
+            console.log('Fetching blog posts from API');
             const response = await fetch(SHEET_URL);
             const csvText = await response.text();
             allPosts = parseCSV(csvText);
 
+            // Cache the data
+            setCacheData(allPosts);
+
             displayPosts(allPosts);
-            
+
             if (loadingState) loadingState.style.display = 'none';
             if (blogGrid) blogGrid.style.display = 'grid';
         } catch (error) {
@@ -69,7 +118,7 @@ const BlogModule = (function () {
     function displayPosts(posts) {
         const grid = document.getElementById('blogGrid');
         const emptyState = document.getElementById('emptyState');
-        
+
         if (!grid) return;
 
         grid.innerHTML = '';
@@ -126,7 +175,7 @@ const BlogModule = (function () {
 
     function initializeFilters() {
         const filterButtons = document.querySelectorAll('.filter-btn');
-        
+
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 // Update active button
@@ -178,7 +227,7 @@ const BlogModule = (function () {
 
             displayArticle(article);
             loadRelatedPosts(article.category, article.id);
-            
+
             if (loadingState) loadingState.style.display = 'none';
             if (articleContainer) articleContainer.style.display = 'block';
         } catch (error) {
@@ -189,7 +238,7 @@ const BlogModule = (function () {
 
     function displayArticle(article) {
         document.title = `${article.title} - IPFO`;
-        
+
         const elements = {
             category: document.getElementById('articleCategory'),
             title: document.getElementById('articleTitle'),
@@ -204,12 +253,12 @@ const BlogModule = (function () {
         if (elements.title) elements.title.textContent = article.title;
         if (elements.date) elements.date.textContent = formatDate(article.date);
         if (elements.author) elements.author.textContent = article.author;
-        
+
         if (elements.image) {
             elements.image.src = article.image;
             elements.image.alt = article.title;
         }
-        
+
         if (elements.content) elements.content.innerHTML = article.content;
 
         // Calculate read time
@@ -287,7 +336,7 @@ const BlogModule = (function () {
     function showError() {
         const loadingState = document.getElementById('loadingState');
         const errorState = document.getElementById('errorState');
-        
+
         if (loadingState) loadingState.style.display = 'none';
         if (errorState) errorState.style.display = 'flex';
     }
