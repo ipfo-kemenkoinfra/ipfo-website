@@ -131,9 +131,6 @@
     }
 
     .section-content.two-column,
-    .section-content.reverse {
-        grid-template-columns: 1fr;
-    }
 
     .text-content p,
     .text-content li {
