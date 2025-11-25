@@ -9,7 +9,8 @@ refactored-site/
 │   ├── homepage.css        # Homepage-specific styles
 │   ├── contact.css         # Contact page-specific styles
 │   ├── blog.css            # Blog listing page styles
-│   └── blog-article.css    # Individual article page styles
+│   ├── blog-article.css    # Individual article page styles
+│   └── project-catalogue.css    # Individual article page styles
 ├── js/
 │   ├── common.js           # Shared JavaScript functions
 │   ├── components.js       # Reusable HTML components
