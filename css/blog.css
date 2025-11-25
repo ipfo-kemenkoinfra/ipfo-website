@@ -165,6 +165,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
+    /* Standard property for modern browsers */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -179,6 +180,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 4;
     line-clamp: 4;
+    /* Standard property for modern browsers */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
