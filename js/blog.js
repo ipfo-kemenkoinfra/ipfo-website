@@ -66,7 +66,7 @@ const BlogModule = (function () {
             category: row.Category?.trim() || 'General',
             author: row.Author?.trim() || 'IPFO Team',
             date: row.Date?.trim() || new Date().toISOString().split('T')[0],
-            image: row.Image?.trim() || 'https://via.placeholder.com/400x250/1e40af/ffffff?text=IPFO',
+            image: row.Image?.trim() || 'https://placehold.co/400x250/1e40af/ffffff?text=IPFO',
             link: `blog-article.html?id=${row.ID?.trim()}`
         })).filter(post => post.id);
 
@@ -151,7 +151,7 @@ const BlogModule = (function () {
 
         card.innerHTML = `
             <img src="${post.image}" alt="${post.title}" class="blog-image" 
-                 onerror="this.src='https://via.placeholder.com/400x250/1e40af/ffffff?text=IPFO'">
+                 onerror="this.src='https://placehold.co/400x250/1e40af/ffffff?text=IPFO'">
             <div class="blog-content">
                 <div class="blog-meta">
                     <span class="blog-date">
@@ -322,7 +322,7 @@ const BlogModule = (function () {
 
             card.innerHTML = `
                 <img src="${post.image}" alt="${post.title}" 
-                     onerror="this.src='https://via.placeholder.com/400x250/1e40af/ffffff?text=IPFO'">
+                     onerror="this.src='https://placehold.co/400x250/1e40af/ffffff?text=IPFO'">
                 <div class="related-card-content">
                     <h3>${post.title}</h3>
                     <p>${post.excerpt}</p>
