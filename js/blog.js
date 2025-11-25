@@ -1,6 +1,6 @@
 /**
- * Blog Module
- * Handles blog listing and article display functionality
+ * Simplified Blog Module
+ * Core functionality: Search, Filters, View Toggle, Pagination, Caching
  */
 
 const BlogModule = (function () {
@@ -8,9 +8,13 @@ const BlogModule = (function () {
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTjaqBX7gq1Mg0lxaLyw5rO2Bo1jbaxMveEopOadoSUxHFIlJii__6pMTaWTnDkUDeLoTivvmP_dE31/pub?gid=0&single=true&output=csv';
     const CACHE_KEY = 'ipfo_blog_posts';
     const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+    const POSTS_PER_PAGE = 9;
 
     let allPosts = [];
+    let displayedPosts = [];
     let currentFilter = 'all';
+    let currentPage = 1;
+    let searchQuery = '';
 
     // ==========================================================================
     // Caching Functions
@@ -70,11 +74,14 @@ const BlogModule = (function () {
             link: `blog-article.html?id=${row.ID?.trim()}`
         })).filter(post => post.id);
 
+        // Sort by date (newest first)
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
         return posts;
     }
 
     // ==========================================================================
-    // Blog Listing Functions
+    // Blog Loading Functions
     // ==========================================================================
 
     async function loadBlogPosts() {
@@ -87,10 +94,7 @@ const BlogModule = (function () {
         if (cached) {
             console.log('Loading blog posts from cache');
             allPosts = cached;
-            displayPosts(allPosts);
-
-            if (loadingState) loadingState.style.display = 'none';
-            if (blogGrid) blogGrid.style.display = 'grid';
+            initializeBlog();
             return;
         }
 
@@ -104,10 +108,7 @@ const BlogModule = (function () {
             // Cache the data
             setCacheData(allPosts);
 
-            displayPosts(allPosts);
-
-            if (loadingState) loadingState.style.display = 'none';
-            if (blogGrid) blogGrid.style.display = 'grid';
+            initializeBlog();
         } catch (error) {
             console.error('Error loading posts:', error);
             if (loadingState) loadingState.style.display = 'none';
@@ -115,27 +116,81 @@ const BlogModule = (function () {
         }
     }
 
-    function displayPosts(posts) {
-        const grid = document.getElementById('blogGrid');
-        const emptyState = document.getElementById('emptyState');
+    function initializeBlog() {
+        const loadingState = document.getElementById('loadingState');
+        const blogGrid = document.getElementById('blogGrid');
 
-        if (!grid) return;
-
-        grid.innerHTML = '';
-
-        if (posts.length === 0) {
-            grid.style.display = 'none';
-            if (emptyState) emptyState.style.display = 'block';
+        if (allPosts.length === 0) {
+            if (loadingState) loadingState.style.display = 'none';
+            if (document.getElementById('emptyState')) {
+                document.getElementById('emptyState').style.display = 'block';
+            }
             return;
         }
 
-        posts.forEach(post => {
+        // Update filter counts
+        updateFilterCounts();
+
+        // Display initial posts
+        applyFilters();
+
+        // Initialize interactive features
+        initSearch();
+        initFilters();
+        initViewToggle();
+        initLoadMore();
+
+        // Hide loading, show content
+        if (loadingState) loadingState.style.display = 'none';
+        if (blogGrid) blogGrid.style.display = 'grid';
+    }
+
+    // ==========================================================================
+    // Post Display Functions
+    // ==========================================================================
+
+    function displayPosts(posts, append = false) {
+        const grid = document.getElementById('blogGrid');
+        const emptyState = document.getElementById('emptyState');
+        const loadMoreContainer = document.getElementById('loadMoreContainer');
+
+        if (!grid) return;
+
+        if (!append) {
+            grid.innerHTML = '';
+            currentPage = 1;
+        }
+
+        const startIndex = append ? currentPage * POSTS_PER_PAGE : 0;
+        const endIndex = startIndex + POSTS_PER_PAGE;
+        const postsToShow = posts.slice(startIndex, endIndex);
+
+        if (posts.length === 0 && !append) {
+            grid.style.display = 'none';
+            if (emptyState) emptyState.style.display = 'block';
+            if (loadMoreContainer) loadMoreContainer.style.display = 'none';
+            return;
+        }
+
+        postsToShow.forEach(post => {
             const card = createBlogCard(post);
             grid.appendChild(card);
         });
 
         grid.style.display = 'grid';
         if (emptyState) emptyState.style.display = 'none';
+
+        // Show/hide load more button
+        if (loadMoreContainer) {
+            if (endIndex >= posts.length) {
+                loadMoreContainer.style.display = 'none';
+            } else {
+                loadMoreContainer.style.display = 'block';
+                updateShowingCount(endIndex, posts.length);
+            }
+        }
+
+        displayedPosts = posts;
     }
 
     function createBlogCard(post) {
@@ -161,7 +216,7 @@ const BlogModule = (function () {
                 </div>
                 <h3 class="blog-title">${post.title}</h3>
                 <p class="blog-excerpt">${post.excerpt}</p>
-                <a href="${post.link}" class="read-more">
+                <a href="${post.link}" class="read-more" onclick="event.stopPropagation()">
                     Read More <i class="fas fa-arrow-right"></i>
                 </a>
                 <div class="blog-author">
@@ -173,7 +228,32 @@ const BlogModule = (function () {
         return card;
     }
 
-    function initializeFilters() {
+    // ==========================================================================
+    // Filter & Search Functions
+    // ==========================================================================
+
+    function applyFilters() {
+        let filtered = allPosts;
+
+        // Apply category filter
+        if (currentFilter !== 'all') {
+            filtered = filtered.filter(post => post.category === currentFilter);
+        }
+
+        // Apply search filter
+        if (searchQuery) {
+            filtered = filtered.filter(post =>
+                post.title.toLowerCase().includes(searchQuery) ||
+                post.excerpt.toLowerCase().includes(searchQuery) ||
+                post.category.toLowerCase().includes(searchQuery) ||
+                post.author.toLowerCase().includes(searchQuery)
+            );
+        }
+
+        displayPosts(filtered, false);
+    }
+
+    function initFilters() {
         const filterButtons = document.querySelectorAll('.filter-btn');
 
         filterButtons.forEach(btn => {
@@ -182,21 +262,87 @@ const BlogModule = (function () {
                 filterButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Filter posts
-                const category = btn.dataset.category;
-                currentFilter = category;
+                // Update filter
+                currentFilter = btn.dataset.category;
+                applyFilters();
+            });
+        });
+    }
 
-                const filtered = category === 'all'
-                    ? allPosts
-                    : allPosts.filter(post => post.category === category);
+    function updateFilterCounts() {
+        const categories = ['all', 'Infrastructure', 'Investment', 'Policy', 'News'];
 
-                displayPosts(filtered);
+        categories.forEach(cat => {
+            const count = cat === 'all'
+                ? allPosts.length
+                : allPosts.filter(p => p.category === cat).length;
+
+            const btn = document.querySelector(`[data-category="${cat}"]`);
+            if (btn) {
+                const countSpan = btn.querySelector('.count');
+                if (countSpan) countSpan.textContent = count;
+            }
+        });
+    }
+
+    // ==========================================================================
+    // Search Functionality
+    // ==========================================================================
+
+    function initSearch() {
+        const searchInput = document.getElementById('searchInput');
+        if (!searchInput) return;
+
+        searchInput.addEventListener('input', debounce(function (e) {
+            searchQuery = e.target.value.toLowerCase().trim();
+            applyFilters();
+        }, 300));
+    }
+
+    // ==========================================================================
+    // View Toggle (Grid/List)
+    // ==========================================================================
+
+    function initViewToggle() {
+        const viewBtns = document.querySelectorAll('.view-btn');
+        const blogGrid = document.getElementById('blogGrid');
+
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const view = btn.dataset.view;
+                if (blogGrid) {
+                    blogGrid.className = view === 'list' ? 'blog-list' : 'blog-grid';
+                }
             });
         });
     }
 
     // ==========================================================================
-    // Article Display Functions
+    // Load More Functionality
+    // ==========================================================================
+
+    function initLoadMore() {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (!loadMoreBtn) return;
+
+        loadMoreBtn.addEventListener('click', () => {
+            currentPage++;
+            displayPosts(displayedPosts, true);
+        });
+    }
+
+    function updateShowingCount(shown, total) {
+        const countElement = document.getElementById('showingCount');
+        if (countElement) {
+            countElement.textContent = `Showing ${shown} of ${total} articles`;
+        }
+    }
+
+    // ==========================================================================
+    // Article Display Functions (for blog-article.html)
     // ==========================================================================
 
     async function loadArticle() {
@@ -251,7 +397,14 @@ const BlogModule = (function () {
 
         if (elements.category) elements.category.textContent = article.category;
         if (elements.title) elements.title.textContent = article.title;
-        if (elements.date) elements.date.textContent = formatDate(article.date);
+        if (elements.date) {
+            const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            elements.date.textContent = formattedDate;
+        }
         if (elements.author) elements.author.textContent = article.author;
 
         if (elements.image) {
@@ -271,13 +424,9 @@ const BlogModule = (function () {
         setupShareButtons(article.title);
     }
 
-    function formatDate(dateString) {
+    function formatDate(dateString, options = { year: 'numeric', month: 'long', day: 'numeric' }) {
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+        return date.toLocaleDateString('en-US', options);
     }
 
     function setupShareButtons(title) {
@@ -333,6 +482,22 @@ const BlogModule = (function () {
         });
     }
 
+    // ==========================================================================
+    // Utility Functions
+    // ==========================================================================
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     function showError() {
         const loadingState = document.getElementById('loadingState');
         const errorState = document.getElementById('errorState');
@@ -348,7 +513,7 @@ const BlogModule = (function () {
     return {
         loadBlogPosts,
         loadArticle,
-        initializeFilters
+        initializeFilters: initFilters
     };
 })();
 
