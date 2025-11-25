@@ -130,7 +130,21 @@
         font-size: 2rem;
     }
 
+    /* FIX: Stack sections vertically on mobile */
     .section-content.two-column,
+    .section-content.reverse {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* FIX: Ensure header comes first on mobile */
+    .section-content.two-column h2 {
+        order: -1;
+    }
+
+    .section-content.reverse h2 {
+        order: -1;
+    }
 
     .text-content p,
     .text-content li {
