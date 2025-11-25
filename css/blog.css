@@ -2,11 +2,24 @@
    Blog Listing Page Styles - Original Style with Enhanced Functionality
    ========================================================================== */
 
+/* Prevent horizontal scroll on mobile */
+body {
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 /* Newsletter Section */
 .newsletter-section {
     background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
     padding: 40px 0;
     color: white;
+    overflow: hidden;
 }
 
 .newsletter-content {
@@ -51,6 +64,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .newsletter-form button:hover {
@@ -160,6 +174,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .filter-btn .count {
@@ -519,8 +534,23 @@
         font-size: 1.5rem;
     }
 
+    .newsletter-text p {
+        font-size: 1rem;
+    }
+
     .newsletter-form {
         max-width: 100%;
+        width: 100%;
+    }
+
+    .newsletter-form input {
+        font-size: 0.95rem;
+        padding: 12px 15px;
+    }
+
+    .newsletter-form button {
+        padding: 12px 20px;
+        font-size: 0.95rem;
     }
 
     .blog-controls {
@@ -536,6 +566,21 @@
         align-self: center;
     }
 
+    .blog-filters {
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .filter-btn {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+
+    .filter-btn .count {
+        font-size: 0.75rem;
+        padding: 2px 6px;
+    }
+
     .blog-grid {
         grid-template-columns: 1fr;
     }
@@ -548,6 +593,8 @@
     .blog-list .blog-card {
         flex-direction: column;
         min-height: auto;
+        height: auto;
+        max-height: none;
     }
 
     .blog-list .blog-image {
@@ -567,8 +614,25 @@
 }
 
 @media (max-width: 480px) {
+    .newsletter-section {
+        padding: 30px 0;
+    }
+
+    .newsletter-text h2 {
+        font-size: 1.3rem;
+    }
+
+    .newsletter-text p {
+        font-size: 0.9rem;
+    }
+
     .newsletter-form {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .newsletter-form input {
+        width: 100%;
     }
 
     .newsletter-form button {
@@ -576,8 +640,8 @@
     }
 
     .filter-btn {
-        font-size: 0.9rem;
-        padding: 8px 18px;
+        font-size: 0.8rem;
+        padding: 7px 14px;
     }
 
     .blog-title {
