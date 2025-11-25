@@ -161,7 +161,8 @@ const BlogModule = (function () {
             currentPage = 1;
         }
 
-        const startIndex = append ? currentPage * POSTS_PER_PAGE : 0;
+        // Calculate which posts to show
+        const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
         const endIndex = startIndex + POSTS_PER_PAGE;
         const postsToShow = posts.slice(startIndex, endIndex);
 
@@ -329,8 +330,26 @@ const BlogModule = (function () {
         if (!loadMoreBtn) return;
 
         loadMoreBtn.addEventListener('click', () => {
-            currentPage++;
-            displayPosts(displayedPosts, true);
+            currentPage++; // Increment page first
+
+            const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+            const endIndex = startIndex + POSTS_PER_PAGE;
+            const morePosts = displayedPosts.slice(startIndex, endIndex);
+
+            // Append new posts to grid
+            const grid = document.getElementById('blogGrid');
+            morePosts.forEach(post => {
+                const card = createBlogCard(post);
+                grid.appendChild(card);
+            });
+
+            // Update count and hide button if no more posts
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            if (endIndex >= displayedPosts.length) {
+                if (loadMoreContainer) loadMoreContainer.style.display = 'none';
+            } else {
+                updateShowingCount(endIndex, displayedPosts.length);
+            }
         });
     }
 
