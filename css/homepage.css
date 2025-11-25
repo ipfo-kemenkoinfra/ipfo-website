@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Homepage Specific Styles
+   ========================================================================== */
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
+                url('https://i.imgur.com/4fvjZKl.jpeg');
+    background-size: cover;
+    background-position: top;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-content {
+    width: 100%;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.hero .highlight {
+    color: var(--white);
+}
+
+.hero .date {
+    font-size: 1.3rem;
+    margin: 30px 0 40px;
+    font-weight: 400;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    width: 220px;
+    padding: 15px 0;
+}
+
+/* Content Sections */
+.section {
+    padding: 80px 0;
+}
+
+.section:nth-child(even) {
+    background: var(--gray-light);
+}
+
+.section h2 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: var(--dark-blue);
+}
+
+.section-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.section-content.two-column {
+    grid-template-columns: 1fr 2fr;
+}
+
+.section-content.reverse {
+    grid-template-columns: 2fr 1fr;
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.text-content ul {
+    margin: 20px 0;
+    padding-left: 30px;
+}
+
+.text-content li {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 15px;
+        min-height: auto;
+    }
+
+    .hero h1 {
+        font-size: 1.4rem;
+        line-height: 1.4;
+    }
+
+    .hero .date {
+        font-size: 1rem;
+        margin: 20px 0;
+    }
+
+    .cta-button {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .section {
+        padding: 50px 0;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    .section-content.two-column,
+    .section-content.reverse {
+        grid-template-columns: 1fr;
+    }
+
+    .text-content p,
+    .text-content li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}

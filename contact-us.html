@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Infrastructure Project Facilitation Office</title>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+
+<body>
+    <!-- Header Top -->
+    <div id="header-top-placeholder"></div>
+
+    <!-- Navigation -->
+    <div id="navigation-placeholder"></div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Get In Touch</h1>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <!-- Contact Info Side -->
+                <div class="contact-info-side">
+                    <h2>Contact Info</h2>
+                    <p>Have an enquiry or feedback for us? We'd love to hear from you.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Office</h3>
+                                <p>
+                                    <a href="https://maps.app.goo.gl/d1MnPAUq1zS32bpJA" target="_blank">
+                                        2nd Floor, Kementerian Koordinator Bidang Infrastruktur dan Pembangunan
+                                        Kewilayahan<br>
+                                        Jl. M.H. Thamrin No.8, RT.10/RW.10, Kb. Sirih, Kec. Menteng, Daerah Khusus
+                                        Ibukota Jakarta 10340
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email</h3>
+                                <p>
+                                    <a href="mailto:sekretariat@ipfo.kemenkoinfra.go.id">
+                                        sekretariat@ipfo.kemenkoinfra.go.id
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Phone</h3>
+                                <p>
+                                    <a href="tel:+6285123332509">+6285123332509</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Side -->
+                <div class="contact-form-side">
+                    <h2>Send Message</h2>
+                    <p class="subtitle">Kindly fill out the form below and our team will be in touch.</p>
+
+                    <form id="contactForm" action="https://formspree.io/f/xdkwazkj" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="enquiryType">Enquiry Type <span class="required">*</span></label>
+                            <select id="enquiryType" name="enquiryType" class="form-control form-select" required>
+                                <option value="">Select enquiry type</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="investment">Investment Opportunity</option>
+                                <option value="media">Media & Press</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" class="form-control textarea"
+                                placeholder="Tell us more about your inquiry..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                        <p id="formStatus" class="form-status"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        // Initialize components
+        IPFOComponents.insertComponents('contact-us.html');
+
+        // Initialize form submission
+        IPFOCommon.handleFormSubmission('contactForm', 'formStatus', 'Thank you for contacting us!');
+    </script>
+</body>
+
+</html>

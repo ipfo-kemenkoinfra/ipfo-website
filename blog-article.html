@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - Infrastructure Project Facilitation Office</title>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog-article.css">
+</head>
+
+<body>
+    <!-- Header Top -->
+    <div id="header-top-placeholder"></div>
+
+    <!-- Navigation -->
+    <div id="navigation-placeholder"></div>
+
+    <!-- Loading State -->
+    <div class="loading-container" id="loadingState">
+        <div class="spinner"></div>
+        <p>Loading article...</p>
+    </div>
+
+    <!-- Article Container -->
+    <div id="articleContainer" style="display: none;">
+        <!-- Article Header -->
+        <div class="article-header">
+            <div class="container">
+                <a href="blog.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+                <span class="article-category" id="articleCategory"></span>
+                <h1 class="article-title" id="articleTitle"></h1>
+                <div class="article-meta">
+                    <span class="article-meta-item">
+                        <i class="far fa-calendar"></i>
+                        <span id="articleDate"></span>
+                    </span>
+                    <span class="article-meta-item">
+                        <i class="far fa-user"></i>
+                        <span id="articleAuthor"></span>
+                    </span>
+                    <span class="article-meta-item">
+                        <i class="far fa-clock"></i>
+                        <span id="readTime"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Image -->
+        <div class="article-image-container container">
+            <img id="articleImage" class="article-image" alt="">
+        </div>
+
+        <!-- Article Content -->
+        <div class="article-content-wrapper">
+            <div class="container">
+                <div class="article-layout">
+                    <!-- Main Content -->
+                    <article class="article-main">
+                        <div class="article-content" id="articleContent"></div>
+                    </article>
+
+                    <!-- Sidebar -->
+                    <aside class="article-sidebar">
+                        <!-- Share Section -->
+                        <div class="sidebar-section">
+                            <h3>Share Article</h3>
+                            <div class="share-buttons">
+                                <a href="#" class="share-button twitter" id="shareTwitter" target="_blank">
+                                    <i class="fab fa-twitter"></i> Twitter
+                                </a>
+                                <a href="#" class="share-button linkedin" id="shareLinkedIn" target="_blank">
+                                    <i class="fab fa-linkedin"></i> LinkedIn
+                                </a>
+                                <a href="#" class="share-button facebook" id="shareFacebook" target="_blank">
+                                    <i class="fab fa-facebook"></i> Facebook
+                                </a>
+                                <a href="#" class="share-button email" id="shareEmail">
+                                    <i class="fas fa-envelope"></i> Email
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter -->
+                        <div class="newsletter-sidebar">
+                            <h3>Stay Updated</h3>
+                            <p>Get the latest infrastructure insights</p>
+                            <form id="sidebarNewsletter" action="https://formspree.io/f/xdkwazkj" method="POST">
+                                <input type="email" name="email" placeholder="Your email" required>
+                                <input type="hidden" name="form_type" value="newsletter_sidebar">
+                                <button type="submit">
+                                    <i class="fas fa-paper-plane"></i> Subscribe
+                                </button>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Articles -->
+        <section class="related-posts">
+            <div class="container">
+                <h2>Related Articles</h2>
+                <div class="related-grid" id="relatedPosts"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-container" id="errorState" style="display: none;">
+        <i class="fas fa-exclamation-circle"></i>
+        <h2>Article Not Found</h2>
+        <p>The article you're looking for doesn't exist or has been removed.</p>
+        <a href="blog.html">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-nav-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/blog.js"></script>
+    <script>
+        // Initialize components
+        IPFOComponents.insertComponents('blog-article.html');
+
+        // Load article
+        BlogModule.loadArticle();
+
+        // Handle newsletter form
+        IPFOCommon.handleFormSubmission('sidebarNewsletter', 'newsletterStatus', 'Thank you for subscribing!');
+    </script>
+</body>
+
+</html>
