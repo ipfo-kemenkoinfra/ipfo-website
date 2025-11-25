@@ -110,6 +110,8 @@
     cursor: pointer;
     will-change: transform;
     /* Performance optimization */
+    display: flex;
+    flex-direction: column;
 }
 
 .blog-card:hover {
@@ -129,6 +131,9 @@
 
 .blog-content {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .blog-meta {
@@ -194,6 +199,8 @@
     font-size: 0.9rem;
     padding-top: 15px;
     border-top: 1px solid var(--gray-light);
+    margin-top: auto;
+    /* Push to bottom */
 }
 
 .read-more {
