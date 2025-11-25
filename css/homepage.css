@@ -4,8 +4,8 @@
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
-                url('https://i.imgur.com/4fvjZKl.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
+        url('https://i.imgur.com/4fvjZKl.jpeg');
     background-size: cover;
     background-position: top;
     min-height: 100vh;
@@ -47,6 +47,9 @@
 .cta-button {
     width: 220px;
     padding: 15px 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Content Sections */
