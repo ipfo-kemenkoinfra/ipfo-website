@@ -222,6 +222,8 @@ body {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    height: auto;
+    /* Allow cards to expand based on content */
 }
 
 .blog-card:hover {
@@ -272,11 +274,7 @@ body {
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 12px;
-    line-height: 1.4;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -285,11 +283,6 @@ body {
 .blog-excerpt {
     color: var(--gray-medium);
     font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -334,35 +327,40 @@ body {
 
 .blog-list .blog-card {
     flex-direction: row;
-    height: 220px;
-    min-height: 220px;
-    max-height: 220px;
+    height: 240px;
+    min-height: 240px;
+    max-height: 240px;
 }
 
 .blog-list .blog-image {
     width: 300px;
     min-width: 300px;
-    height: 220px;
+    height: 240px;
     flex-shrink: 0;
     object-fit: cover;
 }
 
 .blog-list .blog-content {
-    padding: 20px 25px;
+    padding: 25px;
+    padding-bottom: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .blog-list .blog-title {
     font-size: 1.4rem;
-    margin-bottom: 8px;
-    line-height: 1.3;
-    /* Limit to 2 lines in list view */
+    margin-bottom: 10px;
+    /* Increased from 8px */
+    line-height: 1.4;
+    /* Increased from 1.3 */
+    padding-bottom: 4px;
+    /* Increased from 2px */
+    /* Limit to 1 line in list view */
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -370,11 +368,18 @@ body {
 
 .blog-list .blog-excerpt {
     /* Limit to 2 lines to fit uniform height */
+    display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    margin-bottom: 10px;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Increased from 10px */
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    /* Increased from 1.5 */
+    padding-bottom: 4px;
+    /* Increased from 2px */
 }
 
 .blog-list .blog-meta {
