@@ -23,6 +23,22 @@ function initSmoothScrolling() {
 }
 
 // ==========================================================================
+// Utility: Debounce Function
+// ==========================================================================
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// ==========================================================================
 // Navbar Scroll Effect
 // ==========================================================================
 
@@ -30,7 +46,7 @@ function initNavbarScrollEffect() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
-    window.addEventListener('scroll', function () {
+    const handleScroll = debounce(function () {
         if (window.scrollY > 100) {
             navbar.style.background = 'linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(30, 64, 175, 0.95))';
             navbar.style.backdropFilter = 'blur(10px)';
@@ -38,7 +54,10 @@ function initNavbarScrollEffect() {
             navbar.style.background = 'linear-gradient(135deg, var(--dark-blue), var(--primary-blue))';
             navbar.style.backdropFilter = 'none';
         }
-    });
+    }, 10);
+
+    // Use passive listener for better scroll performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
 // ==========================================================================
@@ -74,12 +93,8 @@ function initScrollAnimations() {
 // ==========================================================================
 
 function initPageLoadAnimation() {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease-in';
-
-    window.addEventListener('load', function () {
-        document.body.style.opacity = '1';
-    });
+    // Removed fade-in animation to prevent white flash
+    // Page now loads instantly without animation
 }
 
 // ==========================================================================
