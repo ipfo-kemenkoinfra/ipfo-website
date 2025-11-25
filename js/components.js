@@ -87,7 +87,7 @@ function createFooter() {
                             <a href="https://maps.app.goo.gl/d1MnPAUq1zS32bpJA" target="_blank">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <p>
-                                    Kementerian Koordinator Bidang Infrastruktur & Pembangunan Kewilayahan<br>
+                                    2nd floor, Kementerian Koordinator Bidang Infrastruktur & Pembangunan Kewilayahan<br>
                                     Jl. M.H. Thamrin No.8, RT.10/RW.10, Kb. Sirih, Kec. Menteng, Jakarta Pusat<br>
                                     Daerah Khusus Ibukota Jakarta 10340
                                 </p>
