@@ -242,13 +242,27 @@ const BlogModule = (function () {
         }
 
         // Apply search filter
+        // Apply search filter
         if (searchQuery) {
-            filtered = filtered.filter(post =>
-                post.title.toLowerCase().includes(searchQuery) ||
-                post.excerpt.toLowerCase().includes(searchQuery) ||
-                post.category.toLowerCase().includes(searchQuery) ||
-                post.author.toLowerCase().includes(searchQuery)
-            );
+            // 1. Configure Fuse options
+            const options = {
+                // keys: which fields to search in
+                keys: ['title', 'excerpt', 'category', 'author'],
+                // threshold: 0.0 = perfect match, 1.0 = match anything. 
+                // 0.3 or 0.4 is usually a good "fuzzy" balance.
+                threshold: 0.3,
+                includeScore: true
+            };
+
+            // 2. Initialize Fuse with the current (already filtered by category) posts
+            const fuse = new Fuse(filtered, options);
+
+            // 3. Perform the search
+            const results = fuse.search(searchQuery);
+
+            // 4. Extract the actual items from the results
+            // Fuse returns objects like { item: PostObject, score: 0.123 }
+            filtered = results.map(result => result.item);
         }
 
         displayPosts(filtered, false);
