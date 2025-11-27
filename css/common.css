@@ -2,6 +2,25 @@
    Common Styles - Shared across all pages
    ========================================================================== */
 
+/* Add to css/common.css */
+#header-top-placeholder {
+    min-height: 40px;
+    display: block;
+    background: var(--dark-blue);
+}
+
+#navigation-placeholder {
+    min-height: 80px;
+    display: block;
+    background: var(--dark-blue);
+}
+
+#footer-placeholder {
+    min-height: 300px;
+    display: block;
+    background: var(--gray-light);
+}
+
 :root {
     --primary-blue: #1e40af;
     --dark-blue: #1e3a8a;
@@ -21,7 +40,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background: var(--white);
