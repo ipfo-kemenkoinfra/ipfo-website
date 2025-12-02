@@ -53,7 +53,7 @@ function createNavigation(activePage = '') {
                 <div class="container">
                     <div class="nav-container">
                         <div class="logo">
-                            <img src="https://i.imgur.com/PsjsTEv.png" alt="IPFO Logo">
+                            <img src="assets/images/ipfo-logo.png" alt="IPFO Logo">
                         </div>
                         <ul class="nav-menu">
                             ${desktopMenu}
