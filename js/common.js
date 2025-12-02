@@ -102,7 +102,7 @@ function initPageLoadAnimation() {
 // ==========================================================================
 
 function setActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop() || 'homepage.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-menu a, .mobile-nav-item');
 
     navLinks.forEach(link => {

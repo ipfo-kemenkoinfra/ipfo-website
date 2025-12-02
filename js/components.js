@@ -26,7 +26,7 @@ function createHeaderTop() {
 
 function createNavigation(activePage = '') {
     const menuItems = [
-        { href: 'homepage.html', label: 'Home', icon: 'home' },
+        { href: 'index.html', label: 'Home', icon: 'home' },
         { href: 'project-catalogue.html', label: 'Project Catalogue', icon: 'folder-open' },
         { href: 'contact-us.html', label: 'Contact Us', icon: 'envelope' },
         { href: 'blog.html', label: 'Blog', icon: 'newspaper' }
