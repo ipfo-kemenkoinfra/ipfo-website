@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ipfo.kemenkoinfra.go.id/sitemap.xml
