@@ -7,19 +7,6 @@
 // Header Top Component
 // ==========================================================================
 
-function loadIconLibrary() {
-    // Add Font Awesome stylesheet once so icon elements render correctly
-    if (document.querySelector('link[data-icon-lib="fontawesome"]')) return;
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css';
-    link.crossOrigin = 'anonymous';
-    link.referrerPolicy = 'no-referrer';
-    link.setAttribute('data-icon-lib', 'fontawesome');
-    document.head.appendChild(link);
-}
-
 function createHeaderTop() {
     return `
         <div class="header-top">
@@ -132,8 +119,6 @@ function createFooter() {
 // ==========================================================================
 
 function insertComponents(activePage = '') {
-    loadIconLibrary();
-
     // Insert header top
     const headerTopPlaceholder = document.getElementById('header-top-placeholder');
     if (headerTopPlaceholder) {
