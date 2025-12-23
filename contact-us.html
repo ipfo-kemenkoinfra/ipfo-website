@@ -5,39 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Primary Meta Tags -->
-    <title>Infrastructure Project Facilitation Office - IPFO</title>
-    <meta name="title" content="Infrastructure Project Facilitation Office - IPFO">
+    <!-- Primary Meta Tags - UNIQUE TO THIS PAGE -->
+    <title>Contact Us - IPFO Indonesia Infrastructure Investment</title>
+    <meta name="title" content="Contact Us - IPFO Indonesia Infrastructure Investment">
     <meta name="description"
-        content="Facilitating Indonesia infrastructure project investment to support sustainable and equitable growth. Access infrastructure projects and investment opportunities.">
-    <meta name="keywords" content="Indonesia infrastructure, IPFO, infrastructure investment, PPP projects">
+        content="Get in touch with the Infrastructure Project Facilitation Office (IPFO) for inquiries about infrastructure investment opportunities in Indonesia. We're here to help.">
+    <meta name="keywords"
+        content="contact IPFO, infrastructure investment inquiry, Indonesia investment contact, IPFO office, infrastructure partnership, investment opportunity">
+    <meta name="author" content="Infrastructure Project Facilitation Office">
+    <meta name="robots" content="index, follow">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://ipfo.kemenkoinfra.go.id/">
+    <link rel="canonical" href="https://ipfo.kemenkoinfra.go.id/contact-us.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ipfo.kemenkoinfra.go.id/">
-    <meta property="og:title" content="Infrastructure Project Facilitation Office - IPFO">
-    <meta property="og:description" content="Facilitating Indonesia infrastructure project investment.">
-    <meta property="og:image" content="https://ipfo.kemenkoinfra.go.id/og-image.jpg">
+    <meta property="og:url" content="https://ipfo.kemenkoinfra.go.id/contact-us.html">
+    <meta property="og:title" content="Contact Us - IPFO Indonesia Infrastructure Investment">
+    <meta property="og:description"
+        content="Get in touch with IPFO for inquiries about infrastructure investment opportunities in Indonesia.">
+    <meta property="og:image" content="https://ipfo.kemenkoinfra.go.id/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="IPFO Indonesia">
+    <meta property="og:locale" content="en_US">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Infrastructure Project Facilitation Office - IPFO">
-    <meta name="twitter:description" content="Facilitating Indonesia infrastructure investment.">
+    <meta name="twitter:url" content="https://ipfo.kemenkoinfra.go.id/contact-us.html">
+    <meta name="twitter:title" content="Contact Us - IPFO Indonesia Infrastructure Investment">
+    <meta name="twitter:description"
+        content="Get in touch with IPFO for inquiries about infrastructure investment opportunities in Indonesia.">
+    <meta name="twitter:image" content="https://ipfo.kemenkoinfra.go.id/assets/images/og-image.jpg">
 
-    <!-- Favicon Links - Clean and Organized -->
+    <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Contact Us - Infrastructure Project Facilitation Office</title>
 
-    <!-- Font Awesome -->
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -45,6 +59,32 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/share.css">
+
+    <!-- Structured Data for Contact Page -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact IPFO",
+        "description": "Get in touch with the Infrastructure Project Facilitation Office for infrastructure investment inquiries.",
+        "url": "https://ipfo.kemenkoinfra.go.id/contact-us.html",
+        "mainEntity": {
+            "@type": "GovernmentOrganization",
+            "name": "Infrastructure Project Facilitation Office (IPFO)",
+            "email": "sekretariat@ipfo.kemenkoinfra.go.id",
+            "telephone": "+6285123332509",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Jl. M.H. Thamrin No.8, 2nd Floor, Kementerian Koordinator Bidang Infrastruktur dan Pembangunan Kewilayahan",
+                "addressLocality": "Jakarta Pusat",
+                "addressRegion": "DKI Jakarta",
+                "postalCode": "10340",
+                "addressCountry": "ID"
+            }
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -181,12 +221,14 @@
     <!-- Scripts -->
     <script src="js/components.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/share.js"></script>
     <script>
         // Initialize components
         IPFOComponents.insertComponents('contact-us.html');
 
-        // Initialize form submission
-        IPFOCommon.handleFormSubmission('contactForm', 'formStatus', 'Thank you for contacting us!');
+        // Initialize form submission with tracking
+        IPFOCommon.handleFormSubmission('contactForm', 'formStatus', 'Thank you for contacting us! We will get back to you soon.');
     </script>
 </body>
 

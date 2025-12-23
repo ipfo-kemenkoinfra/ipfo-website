@@ -5,39 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Primary Meta Tags -->
-    <title>Infrastructure Project Facilitation Office - IPFO</title>
-    <meta name="title" content="Infrastructure Project Facilitation Office - IPFO">
+    <!-- Primary Meta Tags - UNIQUE TO THIS PAGE -->
+    <title>Project Catalogue - IPFO Indonesia Infrastructure Investment</title>
+    <meta name="title" content="Project Catalogue - IPFO Indonesia Infrastructure Investment">
     <meta name="description"
-        content="Facilitating Indonesia infrastructure project investment to support sustainable and equitable growth. Access infrastructure projects and investment opportunities.">
-    <meta name="keywords" content="Indonesia infrastructure, IPFO, infrastructure investment, PPP projects">
+        content="Browse Indonesia's infrastructure project catalogue featuring strategic projects in transportation, energy, water, and waste management sectors available for private investment.">
+    <meta name="keywords"
+        content="Indonesia infrastructure projects, project catalogue, PPP projects Indonesia, infrastructure investment opportunities, strategic projects, water supply, energy, transportation">
+    <meta name="author" content="Infrastructure Project Facilitation Office">
+    <meta name="robots" content="index, follow">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://ipfo.kemenkoinfra.go.id/">
+    <link rel="canonical" href="https://ipfo.kemenkoinfra.go.id/project-catalogue.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ipfo.kemenkoinfra.go.id/">
-    <meta property="og:title" content="Infrastructure Project Facilitation Office - IPFO">
-    <meta property="og:description" content="Facilitating Indonesia infrastructure project investment.">
-    <meta property="og:image" content="https://ipfo.kemenkoinfra.go.id/og-image.jpg">
+    <meta property="og:url" content="https://ipfo.kemenkoinfra.go.id/project-catalogue.html">
+    <meta property="og:title" content="Project Catalogue - IPFO Indonesia Infrastructure Investment">
+    <meta property="og:description"
+        content="Browse Indonesia's infrastructure project catalogue featuring strategic projects available for private investment.">
+    <meta property="og:image" content="https://ipfo.kemenkoinfra.go.id/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="IPFO Indonesia">
+    <meta property="og:locale" content="en_US">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Infrastructure Project Facilitation Office - IPFO">
-    <meta name="twitter:description" content="Facilitating Indonesia infrastructure investment.">
+    <meta name="twitter:url" content="https://ipfo.kemenkoinfra.go.id/project-catalogue.html">
+    <meta name="twitter:title" content="Project Catalogue - IPFO Indonesia Infrastructure Investment">
+    <meta name="twitter:description"
+        content="Browse Indonesia's infrastructure project catalogue featuring strategic projects available for private investment.">
+    <meta name="twitter:image" content="https://ipfo.kemenkoinfra.go.id/assets/images/og-image.jpg">
 
-    <!-- Favicon Links - Clean and Organized -->
+    <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Project Catalogue - Infrastructure Project Facilitation Office</title>
 
-    <!-- Font Awesome -->
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -45,6 +59,28 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/project-catalogue.css">
+    <link rel="stylesheet" href="css/share.css">
+
+    <!-- Structured Data for Catalogue Page -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Project Catalogue - IPFO Indonesia",
+        "description": "Browse Indonesia's infrastructure project catalogue featuring strategic projects available for private investment.",
+        "url": "https://ipfo.kemenkoinfra.go.id/project-catalogue.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Infrastructure Project Facilitation Office",
+            "url": "https://ipfo.kemenkoinfra.go.id"
+        },
+        "about": {
+            "@type": "ItemList",
+            "name": "Indonesia Infrastructure Projects",
+            "description": "Strategic infrastructure projects across transportation, energy, water, and waste management sectors"
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -68,7 +104,8 @@
         <div class="container">
             <!-- Catalogue Image -->
             <div class="catalogue-image-container">
-                <img src="/assets/project-catalogue/Q4 2025.png" alt="Catalogue Image" class="catalogue-image">
+                <img src="/assets/project-catalogue/Q4 2025.png" alt="IPFO Q4 2025 Project Catalogue Cover"
+                    class="catalogue-image">
             </div>
 
             <!-- Catalogue Content -->
@@ -130,9 +167,28 @@
                 <!-- CTA Button -->
                 <div class="cta-container">
                     <a href="https://drive.google.com/file/d/1XNlLyTVxNa8K5KT-ncm63yyUG3KIqmB9/view?usp=sharing"
-                        class="cta-button" target="_blank">
+                        class="cta-button" target="_blank" id="catalogueDownloadBtn">
                         VIEW CATALOGUE <i class="fas fa-arrow-right"></i>
                     </a>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-row-compact" style="justify-content: center; margin-top: 30px;">
+                    <span class="share-label">Share this page:</span>
+                    <div class="share-bar">
+                        <button class="share-btn share-btn-copy" data-share="copy">
+                            <i class="fas fa-link"></i> <span>Copy Link</span>
+                        </button>
+                        <button class="share-btn share-btn-linkedin" data-share="linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                        <button class="share-btn share-btn-twitter" data-share="twitter">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="share-btn share-btn-whatsapp" data-share="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,9 +203,16 @@
     <!-- Scripts -->
     <script src="js/components.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/share.js"></script>
     <script>
         // Initialize components
         IPFOComponents.insertComponents('project-catalogue.html');
+
+        // Track catalogue view
+        if (window.IPFOAnalytics) {
+            IPFOAnalytics.trackCatalogueView('Q4 2025');
+        }
     </script>
 </body>
 

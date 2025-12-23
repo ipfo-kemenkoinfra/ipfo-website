@@ -4,17 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon Links - Clean and Organized -->
+
+    <!-- Primary Meta Tags - Will be updated dynamically by JavaScript -->
+    <title>Article - IPFO Indonesia</title>
+    <meta name="title" content="Article - IPFO Indonesia">
+    <meta name="description" content="Read the latest insights on Indonesia infrastructure development from IPFO.">
+    <meta name="keywords" content="Indonesia infrastructure, IPFO article, infrastructure insights, investment news">
+    <meta name="author" content="Infrastructure Project Facilitation Office">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL - Will be updated dynamically -->
+    <link rel="canonical" href="https://ipfo.kemenkoinfra.go.id/blog-article.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ipfo.kemenkoinfra.go.id/blog-article.html">
+    <meta property="og:title" content="Article - IPFO Indonesia">
+    <meta property="og:description"
+        content="Read the latest insights on Indonesia infrastructure development from IPFO.">
+    <meta property="og:image" content="https://ipfo.kemenkoinfra.go.id/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="IPFO Indonesia">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://ipfo.kemenkoinfra.go.id/blog-article.html">
+    <meta name="twitter:title" content="Article - IPFO Indonesia">
+    <meta name="twitter:description"
+        content="Read the latest insights on Indonesia infrastructure development from IPFO.">
+    <meta name="twitter:image" content="https://ipfo.kemenkoinfra.go.id/assets/images/og-image.jpg">
+
+    <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Article - Infrastructure Project Facilitation Office</title>
 
-    <!-- Font Awesome -->
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,6 +57,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/blog-article.css">
+    <link rel="stylesheet" href="css/share.css">
 </head>
 
 <body>
@@ -61,6 +97,13 @@
                         <span id="readTime"></span>
                     </span>
                 </div>
+
+                <!-- Copy Link Button in Header -->
+                <div class="share-row-compact" style="margin-top: 20px;">
+                    <button class="copy-link-inline" id="copyLinkBtn">
+                        <i class="fas fa-link"></i> Copy Link
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -76,6 +119,28 @@
                     <!-- Main Content -->
                     <article class="article-main">
                         <div class="article-content" id="articleContent"></div>
+
+                        <!-- Share Section at End of Article -->
+                        <div class="article-share-section">
+                            <h4>Found this article helpful? Share it!</h4>
+                            <div class="share-bar">
+                                <button class="share-btn share-btn-copy" id="copyLinkBtnBottom">
+                                    <i class="fas fa-link"></i> <span>Copy Link</span>
+                                </button>
+                                <button class="share-btn share-btn-twitter" data-share="twitter">
+                                    <i class="fab fa-twitter"></i> <span>Twitter</span>
+                                </button>
+                                <button class="share-btn share-btn-linkedin" data-share="linkedin">
+                                    <i class="fab fa-linkedin"></i> <span>LinkedIn</span>
+                                </button>
+                                <button class="share-btn share-btn-whatsapp" data-share="whatsapp">
+                                    <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                                </button>
+                                <button class="share-btn share-btn-email" data-share="email">
+                                    <i class="fas fa-envelope"></i> <span>Email</span>
+                                </button>
+                            </div>
+                        </div>
                     </article>
 
                     <!-- Sidebar -->
@@ -84,6 +149,9 @@
                         <div class="sidebar-section">
                             <h3>Share Article</h3>
                             <div class="share-buttons">
+                                <button class="share-button copy" id="sidebarCopyLink">
+                                    <i class="fas fa-link"></i> Copy Link
+                                </button>
                                 <a href="#" class="share-button twitter" id="shareTwitter" target="_blank">
                                     <i class="fab fa-twitter"></i> Twitter
                                 </a>
@@ -110,6 +178,8 @@
                                     <i class="fas fa-paper-plane"></i> Subscribe
                                 </button>
                             </form>
+                            <p id="newsletterStatus" class="form-status" style="margin-top: 10px; font-size: 0.85rem;">
+                            </p>
                         </div>
                     </aside>
                 </div>
@@ -146,6 +216,8 @@
     <script src="js/components.js"></script>
     <script src="js/common.js"></script>
     <script src="js/blog.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/share.js"></script>
     <script>
         // Initialize components
         IPFOComponents.insertComponents('blog-article.html');
@@ -155,6 +227,97 @@
 
         // Handle newsletter form
         IPFOCommon.handleFormSubmission('sidebarNewsletter', 'newsletterStatus', 'Thank you for subscribing!');
+
+        // Initialize copy link buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            // Header copy link button
+            const copyLinkBtn = document.getElementById('copyLinkBtn');
+            if (copyLinkBtn) {
+                copyLinkBtn.addEventListener('click', function () {
+                    IPFOShare.copyLink(this);
+                });
+            }
+
+            // Bottom copy link button
+            const copyLinkBtnBottom = document.getElementById('copyLinkBtnBottom');
+            if (copyLinkBtnBottom) {
+                copyLinkBtnBottom.addEventListener('click', function () {
+                    IPFOShare.copyLink(this);
+                });
+            }
+
+            // Sidebar copy link button
+            const sidebarCopyLink = document.getElementById('sidebarCopyLink');
+            if (sidebarCopyLink) {
+                sidebarCopyLink.addEventListener('click', function () {
+                    IPFOShare.copyLink(this);
+                });
+            }
+        });
+
+        // Track article read when loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Wait for article to load, then track
+            const checkArticle = setInterval(function () {
+                const titleEl = document.getElementById('articleTitle');
+                const categoryEl = document.getElementById('articleCategory');
+                if (titleEl && titleEl.textContent && categoryEl && categoryEl.textContent) {
+                    clearInterval(checkArticle);
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const articleId = urlParams.get('id');
+                    if (window.IPFOAnalytics && articleId) {
+                        IPFOAnalytics.trackArticleRead(
+                            articleId,
+                            titleEl.textContent,
+                            categoryEl.textContent
+                        );
+                    }
+
+                    // Update meta tags dynamically for better sharing
+                    updateMetaTags(titleEl.textContent, categoryEl.textContent);
+                }
+            }, 100);
+
+            // Stop checking after 10 seconds
+            setTimeout(function () {
+                clearInterval(checkArticle);
+            }, 10000);
+        });
+
+        // Update meta tags for sharing
+        function updateMetaTags(title, category) {
+            const fullTitle = title + ' - IPFO Indonesia';
+
+            // Update title
+            document.title = fullTitle;
+
+            // Update meta tags
+            const metaTags = {
+                'title': fullTitle,
+                'og:title': fullTitle,
+                'twitter:title': fullTitle,
+                'og:url': window.location.href,
+                'twitter:url': window.location.href
+            };
+
+            Object.keys(metaTags).forEach(function (name) {
+                // Try name attribute first
+                let meta = document.querySelector('meta[name="' + name + '"]');
+                if (!meta) {
+                    // Try property attribute (for og: tags)
+                    meta = document.querySelector('meta[property="' + name + '"]');
+                }
+                if (meta) {
+                    meta.setAttribute('content', metaTags[name]);
+                }
+            });
+
+            // Update canonical
+            const canonical = document.querySelector('link[rel="canonical"]');
+            if (canonical) {
+                canonical.href = window.location.href;
+            }
+        }
     </script>
 </body>
 
