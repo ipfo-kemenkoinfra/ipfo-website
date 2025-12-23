@@ -14,7 +14,10 @@ const IPFOAnalytics = (function () {
     // =========================================================================
     // CONFIGURATION - UPDATE THIS WITH YOUR GA4 MEASUREMENT ID
     // =========================================================================
-    const GA_MEASUREMENT_ID = 'G-CQ66MFVL3M'; // <-- REPLACE WITH YOUR ID
+    const isProduction = window.location.hostname === 'ipfo.kemenkoinfra.go.id';
+    const GA_MEASUREMENT_ID = isProduction
+        ? 'G-93QVC9686V'    // Production tracking
+        : 'G-CQ66MFVL3M';    // Dev/test tracking (optional)
 
     // =========================================================================
     // Initialize GA4
