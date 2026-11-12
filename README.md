@@ -12,12 +12,17 @@ refactored-site/
 │   ├── blog-article.css    # Individual article page styles
 │   └── project-catalogue.css    # Individual article page styles
 ├── js/
-│   ├── common.js           # Shared JavaScript functions
+│   ├── config.js           # Form endpoint (Apps Script URL) + Turnstile site key
+│   ├── common.js           # Shared JavaScript functions (incl. form submission)
 │   ├── components.js       # Reusable HTML components
+│   ├── catalogue.js        # Project catalogue rendering (editions.json)
+│   ├── contact.js          # Enquiry form (project list, URL prefill)
 │   └── blog.js             # Blog functionality module
 ├── homepage.html           # Main landing page
 ├── contact-us.html         # Contact form page
-├── project-catalogue.html  # Project catalogue page
+├── project-catalogue.html  # Project catalogue page (rendered from assets/project-catalogue/editions.json)
+├── privacy.html            # Privacy notice (draft, pending legal review)
+├── apps-script/            # Google Apps Script form backend (pasted into Apps Script, not run by the site)
 ├── blog.html               # Blog listing page
 ├── blog-article.html       # Individual blog article page
 └── README.md               # This file
@@ -229,19 +234,31 @@ Edit `js/components.js` in the `createFooter()` function:
 
 ### Task 4: Modify Form Submission
 
-The form handling is already set up in `common.js`. To use it:
+Forms post to a Google Apps Script web app that writes to a Google Sheet (see
+[`apps-script/README.md`](apps-script/README.md) for deployment). The endpoint URL and the
+Cloudflare Turnstile site key are set once in **`js/config.js`**. Include it before `common.js`:
 
 ```html
-<form id="myForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<form id="myForm" novalidate>
+    <input type="hidden" name="form_type" value="enquiry">
     <!-- form fields -->
+    <div class="hp-field" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off"> <!-- honeypot -->
+    </div>
+    <div data-turnstile></div> <!-- optional: Turnstile widget -->
     <button type="submit">Submit</button>
 </form>
 <p id="formStatus"></p>
 
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
 <script>
-    IPFOCommon.handleFormSubmission('myForm', 'formStatus');
+    IPFOCommon.handleFormSubmission('myForm', 'formStatus', 'Thank you!');
 </script>
 ```
+
+The status element is optional: if it is missing, one is created after the form. While the endpoint
+in `js/config.js` is still a placeholder, forms show a "not connected yet, please email us" message.
 
 ## 🎨 CSS Architecture
 

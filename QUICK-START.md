@@ -240,7 +240,7 @@ Any text editor works:
 - [ ] Submit contact form (test it!)
 - [ ] Replace placeholder images (if any)
 - [ ] Update Google Sheets URL for blog
-- [ ] Update Formspree form ID
+- [ ] Set the Apps Script URL and Turnstile site key in `js/config.js` (see `apps-script/README.md`)
 
 ---
 

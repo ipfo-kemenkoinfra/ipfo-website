@@ -162,7 +162,7 @@ After deploying, check these items:
 ## 🔐 Security Checklist
 
 - [ ] Remove any test data or credentials
-- [ ] Verify Formspree form ID is yours
+- [ ] Verify the Apps Script URL and Turnstile site key in `js/config.js` (Turnstile secret only in Script Properties)
 - [ ] Check Google Sheets URL is correct
 - [ ] Don't commit sensitive data to GitHub
 

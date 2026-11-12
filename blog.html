@@ -100,14 +100,24 @@
                     <h2>Stay Updated</h2>
                     <p>Subscribe to get the latest news and insights</p>
                 </div>
-                <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/xdkwazkj"
-                    method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required>
-                    <input type="hidden" name="form_type" value="newsletter">
-                    <button type="submit">
-                        <i class="fas fa-paper-plane"></i> Subscribe
-                    </button>
-                </form>
+                <div class="newsletter-form-wrap">
+                    <form class="newsletter-form" id="newsletterForm" novalidate>
+                        <input type="email" name="email" placeholder="Enter your email" aria-label="Email address"
+                            autocomplete="email" maxlength="200" required>
+                        <input type="hidden" name="form_type" value="newsletter">
+                        <input type="hidden" name="source" value="newsletter">
+                        <!-- Honeypot: leave empty -->
+                        <div class="hp-field" aria-hidden="true">
+                            <input type="text" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </form>
+                    <p id="newsletterStatus" class="newsletter-status"></p>
+                    <p class="newsletter-privacy">We only use your email to send IPFO updates.
+                        <a href="privacy.html">Privacy notice</a></p>
+                </div>
             </div>
         </div>
     </section>
@@ -185,6 +195,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/components.js"></script>
     <script src="js/common.js"></script>
     <script src="js/blog.js"></script>
@@ -198,7 +209,7 @@
         BlogModule.loadBlogPosts();
 
         // Handle newsletter form
-        IPFOCommon.handleFormSubmission('newsletterForm', null, 'Thank you for subscribing!');
+        IPFOCommon.handleFormSubmission('newsletterForm', 'newsletterStatus', 'Thank you for subscribing!');
     </script>
 </body>
 

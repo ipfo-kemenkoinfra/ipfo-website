@@ -171,15 +171,22 @@
                         <div class="newsletter-sidebar">
                             <h3>Stay Updated</h3>
                             <p>Get the latest infrastructure insights</p>
-                            <form id="sidebarNewsletter" action="https://formspree.io/f/xdkwazkj" method="POST">
-                                <input type="email" name="email" placeholder="Your email" required>
-                                <input type="hidden" name="form_type" value="newsletter_sidebar">
+                            <form id="sidebarNewsletter" novalidate>
+                                <input type="email" name="email" placeholder="Your email" aria-label="Email address"
+                                    autocomplete="email" maxlength="200" required>
+                                <input type="hidden" name="form_type" value="newsletter">
+                                <input type="hidden" name="source" value="newsletter_sidebar">
+                                <!-- Honeypot: leave empty -->
+                                <div class="hp-field" aria-hidden="true">
+                                    <input type="text" name="website" tabindex="-1" autocomplete="off">
+                                </div>
                                 <button type="submit">
                                     <i class="fas fa-paper-plane"></i> Subscribe
                                 </button>
                             </form>
                             <p id="newsletterStatus" class="form-status" style="margin-top: 10px; font-size: 0.85rem;">
                             </p>
+                            <p class="newsletter-privacy"><a href="privacy.html">Privacy notice</a></p>
                         </div>
                     </aside>
                 </div>
@@ -213,6 +220,7 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/components.js"></script>
     <script src="js/common.js"></script>
     <script src="js/blog.js"></script>

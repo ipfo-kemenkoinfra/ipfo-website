@@ -272,7 +272,7 @@ Optimization
 Security Measures
 ├── Form Validation
 │   ├── Client-side (HTML5 + JS)
-│   └── Server-side (Formspree)
+│   └── Server-side (Google Apps Script + Turnstile, see apps-script/)
 │
 ├── XSS Protection
 │   ├── No eval() usage
