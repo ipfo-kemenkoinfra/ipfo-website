@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Catalogue cover not available">
+  <rect width="1600" height="900" fill="#f5f5f5"/>
+  <rect x="40" y="40" width="1520" height="820" fill="none" stroke="#d1d5db" stroke-width="6" rx="24"/>
+  <g fill="#6b7280" font-family="Plus Jakarta Sans, Arial, sans-serif" text-anchor="middle">
+    <path d="M740 300h100l60 60v180H740z" fill="none" stroke="#9ca3af" stroke-width="12" stroke-linejoin="round"/>
+    <text x="800" y="640" font-size="56" font-weight="600">IPFO Project Catalogue</text>
+    <text x="800" y="710" font-size="36">Cover image not available</text>
+  </g>
+</svg>

@@ -231,11 +231,46 @@ const IPFOAnalytics = (function () {
 
     /**
      * Track project catalogue view
-     * @param {string} catalogueName - Name/version of the catalogue
+     * @param {string} editionId - Edition id from editions.json (e.g. "2026-q4")
+     * @param {object} [details] - Optional extra info
+     * @param {string} [details.label] - Human label (e.g. "Q4 2026")
+     * @param {boolean} [details.isCurrent] - Whether this is the current edition
+     * @param {string} [details.via] - How it was reached: "default" or "anchor"
      */
-    function trackCatalogueView(catalogueName) {
+    function trackCatalogueView(editionId, details = {}) {
         trackEvent('catalogue_view', {
-            'catalogue_name': catalogueName
+            'catalogue_name': details.label || editionId,
+            'edition_id': editionId,
+            'edition_is_current': details.isCurrent === undefined ? '' : String(details.isCurrent),
+            'view_source': details.via || 'default'
+        });
+    }
+
+    /**
+     * Track a click on a catalogue document (PDF view/download or Kepmenko)
+     * @param {string} editionId - Edition id from editions.json
+     * @param {string} documentKind - "catalogue" or "kepmenko"
+     * @param {string} url - Link target
+     * @param {boolean} [isCurrent] - Whether the edition is the current one
+     */
+    function trackCatalogueOpen(editionId, documentKind, url, isCurrent) {
+        trackEvent('catalogue_open', {
+            'edition_id': editionId,
+            'document_kind': documentKind,
+            'file_url': url,
+            'edition_is_current': isCurrent === undefined ? '' : String(isCurrent)
+        });
+    }
+
+    /**
+     * Track a successful enquiry submission (contact form)
+     * @param {string} enquiryType - interest, facilitation, bottleneck, ...
+     * @param {string} [projectId] - Selected project id, if any
+     */
+    function trackEnquiry(enquiryType, projectId) {
+        trackEvent('enquiry_submitted', {
+            'enquiry_type': enquiryType,
+            'project_id': projectId || ''
         });
     }
 
@@ -307,6 +342,8 @@ const IPFOAnalytics = (function () {
         trackEvent,
         trackDownload,
         trackCatalogueView,
+        trackCatalogueOpen,
+        trackEnquiry,
         trackProjectInterest,
         trackArticleRead,
         trackShare,

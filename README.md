@@ -347,6 +347,56 @@ BlogModule.loadArticle();
 
 Both are loaded from CDN, no installation needed.
 
+## 📚 Publishing a new catalogue edition
+
+`project-catalogue.html` is rendered by `js/catalogue.js` from
+`assets/project-catalogue/editions.json`. Publishing a new edition needs **no HTML edits**.
+
+1. **Add the files** in a new folder named after the edition id (lowercase, no spaces):
+   ```
+   assets/project-catalogue/2027-q2/
+   ├── cover.png        # 16:9 image, ideally 1600×900
+   ├── catalogue.pdf    # optional if the PDF is hosted elsewhere (e.g. Google Drive)
+   └── kepmenko.pdf     # optional legal basis
+   ```
+2. **Edit `assets/project-catalogue/editions.json`:**
+   - Set `"current": false` on the edition that is current now.
+   - Add the new entry with `"current": true`:
+   ```json
+   {
+     "id": "2027-q2",
+     "label": "Q2 2027",
+     "releaseDate": "2027-06-15",
+     "cover": "assets/project-catalogue/2027-q2/cover.png",
+     "pdf": "assets/project-catalogue/2027-q2/catalogue.pdf",
+     "kepmenko": "assets/project-catalogue/2027-q2/kepmenko.pdf",
+     "current": true,
+     "note": ""
+   }
+   ```
+3. **Update `sitemap.xml`:** set `<lastmod>` for `project-catalogue.html` to today.
+4. Commit to `dev`, check the GitHub Pages preview, then release to production as usual.
+
+**Field reference**
+
+| Field | Required | Notes |
+|---|---|---|
+| `id` | yes | Permanent anchor: `project-catalogue.html#2027-q2`. Never rename it once published, because shared links depend on it. |
+| `label` | yes | Shown as "IPFO `<label>` Project Catalogue". |
+| `releaseDate` | no | `YYYY-MM-DD` or `YYYY-MM`. `null` shows "Release date to be announced". |
+| `cover` | no | Missing or broken covers fall back to `cover-missing.svg`. |
+| `pdf` | no | Relative path or full URL. Empty shows a disabled "Catalogue file coming soon" button. |
+| `kepmenko` | no | Shows a "Legal basis (Kepmenko)" link when set. |
+| `current` | yes | Exactly one edition should be `true`. If none is, the newest is used. |
+| `note` | no | Short line shown under the date. |
+
+Previous editions are sorted newest first (by `releaseDate`, falling back to `id`) and carry the
+"Superseded by the current edition" notice automatically. Views and document clicks are sent to GA4 as
+`catalogue_view` and `catalogue_open`, each with `edition_id`.
+
+> **No-JavaScript fallback:** the `<noscript>` block in `project-catalogue.html` links to the current
+> edition's PDF at a fixed path. If the new edition's PDF lives somewhere else, update that one link too.
+
 ## 🚢 Deployment
 
 ### For GitHub Pages:
