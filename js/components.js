@@ -106,6 +106,10 @@ function createFooter() {
                                 <i class="fas fa-phone"></i>
                                 +6285123332509
                             </a>
+                            <a href="privacy.html">
+                                <i class="fas fa-shield-halved"></i>
+                                Privacy notice
+                            </a>
                         </div>
                     </div>
                 </div>
