@@ -341,13 +341,26 @@
 }
 
 .edition-permalink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: var(--gray-medium);
     font-size: 0.9rem;
     text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
 }
 
-.edition-permalink:hover {
+.edition-permalink:hover,
+.edition-permalink:focus-visible {
     color: var(--primary-blue);
+    background: var(--gray-light);
+}
+
+.edition-permalink.is-copied {
+    color: #15803d;
+    background: #dcfce7;
 }
 
 /* Highlight when reached via an anchor (project-catalogue.html#2025-q4) */

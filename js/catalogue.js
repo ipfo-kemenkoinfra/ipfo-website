@@ -148,7 +148,7 @@ const IPFOCatalogue = (function () {
                     <div class="edition-actions">
                         ${renderActions(edition, false)}
                         <a href="#${escapeHtml(edition.id)}" class="edition-permalink" data-permalink="${escapeHtml(edition.id)}"
-                            title="Permanent link to this edition"><i class="fas fa-link" aria-hidden="true"></i> Link</a>
+                            title="Copy a permanent link to this edition" aria-live="polite"><i class="fas fa-link" aria-hidden="true"></i> <span>Copy link</span></a>
                     </div>
                 </div>
             </article>
@@ -237,17 +237,61 @@ const IPFOCatalogue = (function () {
         });
     }
 
+    async function copyText(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (err) {
+            // Fallback for older browsers / non-secure contexts
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            let ok = false;
+            try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+            document.body.removeChild(ta);
+            return ok;
+        }
+    }
+
+    function showCopied(link, ok) {
+        const label = link.querySelector('span');
+        const icon = link.querySelector('i');
+        if (!label || !icon) return;
+        clearTimeout(link._copyTimer);
+        label.textContent = ok ? 'Copied!' : 'Link in address bar';
+        icon.className = ok ? 'fas fa-check' : 'fas fa-link';
+        link.classList.toggle('is-copied', ok);
+        link._copyTimer = setTimeout(() => {
+            label.textContent = 'Copy link';
+            icon.className = 'fas fa-link';
+            link.classList.remove('is-copied');
+        }, 2000);
+    }
+
     function setupClickTracking() {
-        // Clicking the permalink of the edition already in the URL fires no
-        // hashchange, so re-highlight it manually.
+        // "Copy link": copies project-catalogue.html#<id> to the clipboard,
+        // puts it in the address bar and highlights the edition.
+        // (It stays a real link, so right-click > Copy link address works too.)
         document.addEventListener('click', function (e) {
             const permalink = e.target.closest('a[data-permalink]');
             if (!permalink) return;
+            e.preventDefault();
+
             const id = permalink.getAttribute('data-permalink');
-            if (decodeURIComponent(window.location.hash.slice(1)) === id) {
-                e.preventDefault();
-                const edition = editions.find(ed => ed.id === id);
-                if (edition) highlight(edition, true);
+            const url = window.location.href.split('#')[0] + '#' + encodeURIComponent(id);
+            history.replaceState(null, '', '#' + encodeURIComponent(id));
+
+            const edition = editions.find(ed => ed.id === id);
+            if (edition) highlight(edition, false);
+
+            copyText(url).then(ok => showCopied(permalink, ok));
+
+            if (window.IPFOAnalytics && IPFOAnalytics.trackShare) {
+                IPFOAnalytics.trackShare('copy_link', 'catalogue_edition', id);
             }
         });
 
