@@ -161,45 +161,96 @@
                     <h2>Send Message</h2>
                     <p class="subtitle">Kindly fill out the form below and our team will be in touch.</p>
 
-                    <form id="contactForm" action="https://formspree.io/f/xdkwazkj" method="POST">
+                    <noscript>
+                        <p class="form-note form-note-warning">
+                            This form needs JavaScript. Please email us at
+                            <a href="mailto:sekretariat@ipfo.kemenkoinfra.go.id">sekretariat@ipfo.kemenkoinfra.go.id</a>.
+                        </p>
+                    </noscript>
+
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="enquiryType">Enquiry Type <span class="required">*</span></label>
+                            <select id="enquiryType" name="enquiryType" class="form-control form-select" required>
+                                <option value="">Select enquiry type</option>
+                                <option value="interest">Express interest in a project</option>
+                                <option value="facilitation">Request facilitation / one-on-one</option>
+                                <option value="bottleneck">Report a bottleneck</option>
+                                <option value="business-matching">IPFO Business Matching</option>
+                                <option value="media">Media &amp; press</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="projectGroup" hidden>
+                            <label for="projectId">Project <span class="optional">(optional)</span></label>
+                            <select id="projectId" name="projectId" class="form-control form-select">
+                                <option value="">Not about a specific project</option>
+                            </select>
+                            <p class="form-hint">Projects listed in the current
+                                <a href="project-catalogue.html">Project Catalogue</a>.</p>
+                        </div>
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name <span class="required">*</span></label>
-                                <input type="text" id="firstName" name="firstName" class="form-control" required>
+                                <input type="text" id="firstName" name="firstName" class="form-control"
+                                    autocomplete="given-name" maxlength="200" required>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name <span class="required">*</span></label>
-                                <input type="text" id="lastName" name="lastName" class="form-control" required>
+                                <input type="text" id="lastName" name="lastName" class="form-control"
+                                    autocomplete="family-name" maxlength="200" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" autocomplete="email"
+                                maxlength="200" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" name="company" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="enquiryType">Enquiry Type <span class="required">*</span></label>
-                            <select id="enquiryType" name="enquiryType" class="form-control form-select" required>
-                                <option value="">Select enquiry type</option>
-                                <option value="general">General Inquiry</option>
-                                <option value="partnership">Partnership</option>
-                                <option value="investment">Investment Opportunity</option>
-                                <option value="media">Media & Press</option>
-                                <option value="other">Other</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="organization">Organization</label>
+                                <input type="text" id="organization" name="organization" class="form-control"
+                                    autocomplete="organization" maxlength="200">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" id="country" name="country" class="form-control"
+                                    autocomplete="country-name" maxlength="100">
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="message">Message <span class="required">*</span></label>
                             <textarea id="message" name="message" class="form-control textarea"
-                                placeholder="Tell us more about your inquiry..." required></textarea>
+                                placeholder="Tell us more about your enquiry..." maxlength="5000" required
+                                aria-describedby="messageNote"></textarea>
+                            <p class="form-hint" id="messageNote">
+                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                Please do not include confidential information. We will follow up by email.
+                            </p>
                         </div>
+
+                        <!-- Honeypot: hidden from people, bots tend to fill it. Leave empty. -->
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="form-group form-check">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">
+                                I agree that IPFO may use the information I provide to respond to my enquiry, as
+                                described in the <a href="privacy.html" target="_blank" rel="noopener">privacy
+                                    notice</a>. <span class="required">*</span>
+                            </label>
+                        </div>
+
+                        <!-- Cloudflare Turnstile widget is rendered here (site key in js/config.js) -->
+                        <div class="form-group turnstile-slot" data-turnstile></div>
 
                         <button type="submit" class="submit-btn">
                             <i class="fas fa-paper-plane"></i>
@@ -219,16 +270,18 @@
     <div id="mobile-nav-placeholder"></div>
 
     <!-- Scripts -->
+    <script src="js/config.js"></script>
     <script src="js/components.js"></script>
     <script src="js/common.js"></script>
     <script src="js/analytics.js"></script>
     <script src="js/share.js"></script>
+    <script src="js/contact.js"></script>
     <script>
         // Initialize components
         IPFOComponents.insertComponents('contact-us.html');
 
-        // Initialize form submission with tracking
-        IPFOCommon.handleFormSubmission('contactForm', 'formStatus', 'Thank you for contacting us! We will get back to you soon.');
+        // Enquiry form: project list, URL prefill (?type=interest&project=ID), submission
+        IPFOContact.init();
     </script>
 </body>
 

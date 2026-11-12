@@ -116,45 +116,231 @@ function setActiveNavLink() {
 // ==========================================================================
 // Form Submission Handler (Generic)
 // ==========================================================================
+//
+// Sends forms to the Google Apps Script endpoint set in js/config.js as a
+// text/plain JSON POST (a CORS "simple request", which Apps Script supports).
+//
+// Usage:
+//   IPFOCommon.handleFormSubmission('myForm', 'myStatus', 'Thanks!', {
+//       transform: (payload, form) => payload,   // optional: adjust payload
+//       onSuccess: (payload, form) => {}         // optional: after success
+//   });
+// The status element is optional: if it is missing, one is created after the form.
 
-function handleFormSubmission(formId, statusElementId, successMessage = 'Thank you for your submission!') {
+const FORM_TIMEOUT_MS = 20000;
+
+function getSiteConfig() {
+    return window.IPFO_CONFIG || {};
+}
+
+function getContactEmail() {
+    return getSiteConfig().CONTACT_EMAIL || 'sekretariat@ipfo.kemenkoinfra.go.id';
+}
+
+function isFormEndpointConfigured() {
+    const url = String(getSiteConfig().FORM_ENDPOINT || '');
+    return /^https:\/\//.test(url) && !/REPLACE_WITH/i.test(url);
+}
+
+function ensureStatusElement(form, statusElementId) {
+    let el = statusElementId ? document.getElementById(statusElementId) : null;
+    if (!el) {
+        el = document.createElement('p');
+        if (statusElementId) el.id = statusElementId;
+        el.className = 'form-status';
+        form.insertAdjacentElement('afterend', el);
+    }
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    return el;
+}
+
+function setFormStatus(el, type, message, allowHtml = false) {
+    el.classList.add('form-status');
+    el.classList.remove('success', 'error', 'pending');
+    if (type) el.classList.add(type);
+    if (allowHtml) {
+        el.innerHTML = message;
+    } else {
+        el.textContent = message;
+    }
+}
+
+function emailFallbackHtml(prefix, lead = 'Please email us at') {
+    const email = getContactEmail();
+    return `${prefix} ${lead} <a href="mailto:${email}">${email}</a>.`;
+}
+
+/** Turn a form into a plain object. Checkboxes become true/false. */
+function collectFormPayload(form) {
+    const payload = {};
+    Array.from(form.elements).forEach(el => {
+        if (!el.name || el.disabled || el.type === 'submit' || el.type === 'button') return;
+        if (el.type === 'checkbox') {
+            payload[el.name] = el.checked;
+        } else if (el.type === 'radio') {
+            if (el.checked) payload[el.name] = el.value;
+        } else {
+            payload[el.name] = el.value;
+        }
+    });
+
+    // Cloudflare Turnstile injects its token as "cf-turnstile-response"
+    if ('cf-turnstile-response' in payload) {
+        payload.turnstileToken = payload['cf-turnstile-response'];
+        delete payload['cf-turnstile-response'];
+    }
+
+    payload.pageUrl = window.location.href;
+    return payload;
+}
+
+function handleFormSubmission(formId, statusElementId, successMessage = 'Thank you for your submission!', options = {}) {
     const form = document.getElementById(formId);
-    const statusElement = document.getElementById(statusElementId);
+    if (!form) return;
 
-    if (!form || !statusElement) return;
+    const statusElement = ensureStatusElement(form, statusElementId);
+    const submitButton = form.querySelector('[type="submit"]');
+    const turnstileSlot = form.querySelector('[data-turnstile]');
 
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        const formData = new FormData(form);
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        if (!isFormEndpointConfigured()) {
+            setFormStatus(statusElement, 'error',
+                emailFallbackHtml('Sorry, this form is not connected yet, so your message was not sent.'), true);
+            return;
+        }
+
+        let payload = collectFormPayload(form);
+        if (typeof options.transform === 'function') {
+            payload = options.transform(payload, form) || payload;
+        }
+
+        if (turnstileSlot && !payload.turnstileToken) {
+            setFormStatus(statusElement, 'error', turnstileSlot.dataset.turnstileFailed === 'true'
+                ? 'The security check could not load. Please disable content blockers and reload the page, or email us.'
+                : 'Please complete the security check above, then send again.');
+            return;
+        }
+
+        const originalButtonHtml = submitButton ? submitButton.innerHTML : '';
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending&hellip;';
+        }
+        setFormStatus(statusElement, 'pending', 'Sending…');
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), FORM_TIMEOUT_MS);
 
         try {
-            const response = await fetch(form.action, {
-                method: form.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+            const response = await fetch(getSiteConfig().FORM_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload),
+                redirect: 'follow',
+                signal: controller.signal
             });
 
-            if (response.ok) {
-                statusElement.textContent = successMessage;
-                statusElement.className = 'success';
+            let data = null;
+            try {
+                data = await response.json();
+            } catch (parseError) {
+                data = null;
+            }
+
+            if (response.ok && data && data.ok) {
+                setFormStatus(statusElement, 'success', successMessage);
                 form.reset();
+                if (typeof options.onSuccess === 'function') options.onSuccess(payload, form);
             } else {
-                const data = await response.json();
-                if (data.errors) {
-                    statusElement.textContent = data.errors.map(error => error.message).join(', ');
-                } else {
-                    statusElement.textContent = 'Oops! There was a problem submitting your form.';
-                }
-                statusElement.className = 'error';
+                const message = (data && data.message) || 'Sorry, there was a problem sending your message.';
+                setFormStatus(statusElement, 'error',
+                    emailFallbackHtml(escapeHtmlText(message), 'If this keeps happening, email us at'), true);
             }
         } catch (error) {
-            statusElement.textContent = 'Oops! There was a problem submitting your form.';
-            statusElement.className = 'error';
+            const reason = error && error.name === 'AbortError'
+                ? 'Sorry, the server took too long to respond.'
+                : 'Sorry, we could not reach the server.';
+            setFormStatus(statusElement, 'error', emailFallbackHtml(reason, 'Please try again, or email us at'), true);
+        } finally {
+            clearTimeout(timeout);
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonHtml;
+            }
+            resetTurnstile(turnstileSlot);
         }
     });
+}
+
+function escapeHtmlText(value) {
+    const div = document.createElement('div');
+    div.textContent = String(value);
+    return div.innerHTML;
+}
+
+// ==========================================================================
+// Cloudflare Turnstile (spam protection)
+// ==========================================================================
+//
+// Add <div data-turnstile></div> inside a form; the widget is rendered there
+// with the site key from js/config.js. The token is sent as turnstileToken.
+
+let turnstileScriptRequested = false;
+
+function initTurnstile() {
+    const slots = document.querySelectorAll('[data-turnstile]');
+    if (!slots.length || turnstileScriptRequested) return;
+
+    const siteKey = getSiteConfig().TURNSTILE_SITE_KEY;
+    if (!siteKey) {
+        console.warn('Turnstile site key missing in js/config.js');
+        slots.forEach(slot => { slot.dataset.turnstileFailed = 'true'; });
+        return;
+    }
+
+    turnstileScriptRequested = true;
+    window.ipfoTurnstileLoaded = function () {
+        slots.forEach(slot => {
+            try {
+                slot.dataset.widgetId = window.turnstile.render(slot, {
+                    sitekey: siteKey,
+                    theme: 'light',
+                    size: 'flexible'
+                });
+            } catch (err) {
+                console.error('Turnstile render failed:', err);
+                slot.dataset.turnstileFailed = 'true';
+            }
+        });
+    };
+
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=ipfoTurnstileLoaded';
+    script.async = true;
+    script.defer = true;
+    script.onerror = function () {
+        console.error('Turnstile script failed to load');
+        slots.forEach(slot => { slot.dataset.turnstileFailed = 'true'; });
+    };
+    document.head.appendChild(script);
+}
+
+function resetTurnstile(slot) {
+    if (slot && slot.dataset.widgetId && window.turnstile) {
+        try {
+            window.turnstile.reset(slot.dataset.widgetId);
+        } catch (err) {
+            // ignore
+        }
+    }
 }
 
 // ==========================================================================
@@ -176,6 +362,7 @@ function initCommonFunctions() {
     initScrollAnimations();
     initPageLoadAnimation();
     setActiveNavLink();
+    initTurnstile();
 }
 
 // Auto-initialize when DOM is ready
@@ -193,5 +380,7 @@ window.IPFOCommon = {
     initPageLoadAnimation,
     setActiveNavLink,
     handleFormSubmission,
+    isFormEndpointConfigured,
+    initTurnstile,
     formatDate
 };

@@ -1,0 +1,23 @@
+{
+  "_comment": "PLACEHOLDER DATA. Replace with the projects from the current catalogue Excel. Fields: id (stable, used in URLs like contact-us.html?type=interest&project=ID), name, sector, proposedBy.",
+  "projects": [
+    {
+      "id": "PLACEHOLDER-01",
+      "name": "[Placeholder] Example Toll Road Project",
+      "sector": "Transportation",
+      "proposedBy": "Example Ministry"
+    },
+    {
+      "id": "PLACEHOLDER-02",
+      "name": "[Placeholder] Example Water Supply System",
+      "sector": "Water",
+      "proposedBy": "Example Regional Government"
+    },
+    {
+      "id": "PLACEHOLDER-03",
+      "name": "[Placeholder] Example Waste-to-Energy Plant",
+      "sector": "Waste Management",
+      "proposedBy": "Example City Government"
+    }
+  ]
+}
