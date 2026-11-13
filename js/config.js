@@ -10,7 +10,7 @@ window.IPFO_CONFIG = {
      * PLACEHOLDER: until this is replaced, forms show a friendly
      * "not connected yet, please email us" message and send nothing.
      */
-    FORM_ENDPOINT: 'REPLACE_WITH_APPS_SCRIPT_WEB_APP_URL',
+    FORM_ENDPOINT: 'https://script.google.com/macros/s/AKfycbx2P7po0FAWT8iHOPqstMlZIPgubUF44RoX6zndymegIKUB0QGktwk5qSS9adbjdP14MQ/exec',
 
     /**
      * Cloudflare Turnstile SITE key (public; the secret goes in Apps Script
