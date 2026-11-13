@@ -14,12 +14,16 @@ window.IPFO_CONFIG = {
 
     /**
      * Cloudflare Turnstile SITE key (public; the secret goes in Apps Script
-     * Script Properties, never here).
-     * PLACEHOLDER: '1x00000000000000000000AA' is Cloudflare's official
-     * "always passes" test key, so the widget works locally. Its tokens are
-     * rejected by a real secret key, so it must be replaced before launch.
+     * Script Properties, never here). Widget "IPFO website", allowed hostnames:
+     * ipfo.kemenkoinfra.go.id and ipfo-kemenkoinfra.github.io.
+     *
+     * On localhost the real key is not allowed, so Cloudflare's official
+     * "always passes" test key is used instead. Its tokens are rejected by
+     * the real secret, so local tests can't reach the real Sheet.
      */
-    TURNSTILE_SITE_KEY: '1x00000000000000000000AA',
+    TURNSTILE_SITE_KEY: /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)
+        ? '1x00000000000000000000AA'    // local testing only
+        : '0x4AAAAAAF_FVNsHqLYa-HNz',  // production + dev GitHub Pages
 
     /** Shown in fallback messages when the form cannot be used. */
     CONTACT_EMAIL: 'sekretariat@ipfo.kemenkoinfra.go.id'

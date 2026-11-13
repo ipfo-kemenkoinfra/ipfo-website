@@ -46,7 +46,7 @@ Delete this file once every open item below is closed.
 | Q2 2025 PDF | `"pdf"` of `2025-q2` in `editions.json` |
 | Project list | `assets/data/projects.json` (replace the 3 `PLACEHOLDER-*` entries from the catalogue Excel) |
 | Apps Script URL | `FORM_ENDPOINT` in `js/config.js` (follow `apps-script/README.md`) |
-| Turnstile site key | `TURNSTILE_SITE_KEY` in `js/config.js` (currently Cloudflare's always-pass test key) |
+| ~~Turnstile site key~~ | Done (2026-11-13). Secret to be rotated, since it was shared in chat |
 | Turnstile secret | Apps Script → Project Settings → Script Properties → `TURNSTILE_SECRET` |
 | Legal sign-off | `privacy.html`: remove the draft banner, set robots to `index, follow`, add the page to `sitemap.xml` |
 
