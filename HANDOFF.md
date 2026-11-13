@@ -1,6 +1,6 @@
 # Handoff: facilitation channel + catalogue redo (Nov 2026)
 
-Status as of 2026-11-13. Work is on branch `dev`; nothing merged to `main`.
+Status as of 2026-11-13. Release dates confirmed: Q4 2025 = Dec 2025, Q2 2025 = Jun 2025. Work is on branch `dev`; nothing merged to `main`.
 Delete this file once every open item below is closed.
 
 ## What was done (commits on `dev`)
@@ -46,23 +46,19 @@ Delete this file once every open item below is closed.
 
 ## Open questions (need an answer)
 
-- [ ] **Release dates:** Q4 2025 = `2025-12` and Q2 2025 = `2025-06` are guesses (cover commit date / ICI 2025). Confirm.
-- [ ] **Kepmenko document:** Decree No. 102/S of 2026 is cited in the Q4 2026 note. Add the PDF or link as
-      `"kepmenko"` in `editions.json` to show the "Legal basis (Kepmenko)" link.
-- [ ] **Project count:** the Excel's Catalogue tab lists 76 projects, but the "by Status" summary adds up to 72.
-      `projects.json` uses all 76. Check which is right.
+- [ ] **Kepmenko document (waiting, no publishable PDF yet):** Decree No. 102/S of 2026 is cited in the
+      Q4 2026 note. When ready, add it as `"kepmenko"` in `editions.json` to show the "Legal basis (Kepmenko)" link.
+      This is not a blocker for going live.
 - [ ] **Noscript link:** the `<noscript>` block in `project-catalogue.html` hard-codes
       `assets/project-catalogue/2026-q4/catalogue.pdf`. It's the one HTML touch per new edition, unless a
       stable path convention is adopted.
-- [ ] **Rotate the Turnstile secret** (it was shown in a chat screenshot): Cloudflare → widget → Settings →
-      Rotate secret key, then update `TURNSTILE_SECRET` in Script Properties. Afterwards, re-test one enquiry.
-- [ ] **Privacy retention:** the "2 years" for enquiries in `privacy.html` is a proposal; legal to confirm.
+- [ ] **Privacy notice legal review (deferred by the owner):** the "2 years" for enquiries in `privacy.html` is a proposal; legal to confirm.
 
 ## Remaining before going live (in order)
 
-1. ~~Catalogue files and project list~~ (done 2026-11-13); still open: the Kepmenko document and the two old release dates.
+1. ~~Catalogue files and project list~~ (done 2026-11-13). Kepmenko PDF to be added when available; not a blocker.
 2. Legal sign-off on `privacy.html`.
-3. Rotate the Turnstile secret.
+3. ~~Rotate the Turnstile secret~~ (done 2026-11-13).
 4. Final check on the dev site, delete this file, then merge `dev` into `main` (done by the owner, not Claude).
 
 ## Still to supply (and where)
@@ -71,10 +67,10 @@ Delete this file once every open item below is closed.
 |---|---|
 | ~~Q4 2026 cover, PDF, release date~~ | Done (2026-11-13) |
 | ~~Q2 2025 PDF~~ | Done (hosted at `2025-q2/catalogue.pdf`) |
-| ~~Project list~~ | Done: 76 projects from `Project_Catalogue_Q4_2026_extract_v04.xlsx`. For the next edition, regenerate from the new Excel and keep existing ids. |
+| ~~Project list~~ | Done: 76 projects (checked 1:1 against the project pages in the PDF; ignore the Excel "by Status" total of 72) from `Project_Catalogue_Q4_2026_extract_v04.xlsx`. For the next edition, regenerate from the new Excel and keep existing ids. |
 | Kepmenko 102/S/2026 | PDF or link → `"kepmenko"` of `2026-q4` in `editions.json` |
 | ~~Apps Script URL~~ | Done (2026-11-13) |
-| ~~Turnstile site key / secret~~ | Done (2026-11-13). Secret rotation still open, see above |
+| ~~Turnstile site key / secret~~ | Done (2026-11-13), secret rotated |
 | Legal sign-off | `privacy.html`: remove the draft banner, set robots to `index, follow`, add the page to `sitemap.xml` |
 
 ## Testing notes
