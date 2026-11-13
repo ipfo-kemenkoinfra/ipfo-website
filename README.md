@@ -21,7 +21,7 @@ refactored-site/
 ├── homepage.html           # Main landing page
 ├── contact-us.html         # Contact form page
 ├── project-catalogue.html  # Project catalogue page (rendered from assets/project-catalogue/editions.json)
-├── privacy.html            # Privacy notice (draft, pending legal review)
+├── privacy.html            # Privacy notice (legal sign-off 2026-11-13)
 ├── apps-script/            # Google Apps Script form backend (pasted into Apps Script, not run by the site)
 ├── blog.html               # Blog listing page
 ├── blog-article.html       # Individual blog article page

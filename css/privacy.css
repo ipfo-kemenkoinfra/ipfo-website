@@ -12,23 +12,6 @@
     margin: 0 auto;
 }
 
-.draft-banner {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    background: #fffbeb;
-    border: 1px solid #fde68a;
-    border-left: 4px solid var(--yellow-accent);
-    color: #92400e;
-    padding: 14px 18px;
-    border-radius: 8px;
-    margin-bottom: 24px;
-}
-
-.draft-banner i {
-    margin-top: 4px;
-}
-
 .privacy-updated {
     color: var(--gray-medium);
     font-size: 0.95rem;
