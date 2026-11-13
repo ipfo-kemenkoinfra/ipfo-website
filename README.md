@@ -414,6 +414,18 @@ Previous editions are sorted newest first (by `releaseDate`, falling back to `id
 > **No-JavaScript fallback:** the `<noscript>` block in `project-catalogue.html` links to the current
 > edition's PDF at a fixed path. If the new edition's PDF lives somewhere else, update that one link too.
 
+## ♻️ Cache busting (bump on every release that changes CSS/JS)
+
+The production server sends no `Cache-Control` header, so browsers can keep old CSS/JS for days.
+Every page links its CSS/JS with a version tag, e.g. `css/common.css?v=20261113`.
+When a release changes any CSS or JS file, bump the tag in all pages at once:
+
+```bash
+sed -i -E 's/\?v=[0-9]+"/?v=YYYYMMDD"/g' *.html
+```
+
+`editions.json` and `projects.json` are fetched with `cache: 'no-cache'`, so they need no tag.
+
 ## 🚢 Deployment
 
 ### For GitHub Pages:
