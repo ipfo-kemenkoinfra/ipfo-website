@@ -41,7 +41,6 @@
 .catalogue-content p {
     font-size: 1.1rem;
     line-height: 1.8;
-    text-align: justify;
     margin-bottom: 20px;
 }
 
@@ -54,6 +53,29 @@
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 12px;
+}
+
+.catalogue-disclaimer {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 30px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: var(--gray-light);
+    color: var(--gray-dark);
+    font-size: 0.98rem !important;
+    line-height: 1.6 !important;
+}
+
+.catalogue-disclaimer i {
+    color: var(--primary-blue);
+    margin-top: 4px;
+}
+
+.catalogue-disclaimer a {
+    color: var(--primary-blue);
+    font-weight: 600;
 }
 
 /* ==========================================================================
@@ -419,10 +441,6 @@
 
     .previous-editions h2 {
         font-size: 1.5rem;
-    }
-
-    .catalogue-content p {
-        text-align: left;
     }
 
     .catalogue-content p,
