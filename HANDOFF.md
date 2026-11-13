@@ -46,8 +46,11 @@ Delete this file once every open item below is closed.
 
 ## Open questions (need an answer)
 
-- [ ] **Q2 2025 PDF link:** unknown. The card shows "Catalogue file coming soon".
 - [ ] **Release dates:** Q4 2025 = `2025-12` and Q2 2025 = `2025-06` are guesses (cover commit date / ICI 2025). Confirm.
+- [ ] **Kepmenko document:** Decree No. 102/S of 2026 is cited in the Q4 2026 note. Add the PDF or link as
+      `"kepmenko"` in `editions.json` to show the "Legal basis (Kepmenko)" link.
+- [ ] **Project count:** the Excel's Catalogue tab lists 76 projects, but the "by Status" summary adds up to 72.
+      `projects.json` uses all 76. Check which is right.
 - [ ] **Noscript link:** the `<noscript>` block in `project-catalogue.html` hard-codes
       `assets/project-catalogue/2026-q4/catalogue.pdf`. It's the one HTML touch per new edition, unless a
       stable path convention is adopted.
@@ -57,7 +60,7 @@ Delete this file once every open item below is closed.
 
 ## Remaining before going live (in order)
 
-1. Catalogue files and dates (table below), then the project list from the catalogue Excel.
+1. ~~Catalogue files and project list~~ (done 2026-11-13); still open: the Kepmenko document and the two old release dates.
 2. Legal sign-off on `privacy.html`.
 3. Rotate the Turnstile secret.
 4. Final check on the dev site, delete this file, then merge `dev` into `main` (done by the owner, not Claude).
@@ -66,11 +69,10 @@ Delete this file once every open item below is closed.
 
 | Item | Where |
 |---|---|
-| Q4 2026 cover | `assets/project-catalogue/2026-q4/cover.png`; set `"cover"` in `editions.json`; delete `cover-placeholder.svg` |
-| Q4 2026 PDF | `assets/project-catalogue/2026-q4/catalogue.pdf`; set `"pdf"` in `editions.json` |
-| Q4 2026 release date, Kepmenko | `"releaseDate"`, `"kepmenko"` in `editions.json` |
-| Q2 2025 PDF | `"pdf"` of `2025-q2` in `editions.json` |
-| Project list | `assets/data/projects.json` (replace the 3 `PLACEHOLDER-*` entries from the catalogue Excel) |
+| ~~Q4 2026 cover, PDF, release date~~ | Done (2026-11-13) |
+| ~~Q2 2025 PDF~~ | Done (hosted at `2025-q2/catalogue.pdf`) |
+| ~~Project list~~ | Done: 76 projects from `Project_Catalogue_Q4_2026_extract_v04.xlsx`. For the next edition, regenerate from the new Excel and keep existing ids. |
+| Kepmenko 102/S/2026 | PDF or link → `"kepmenko"` of `2026-q4` in `editions.json` |
 | ~~Apps Script URL~~ | Done (2026-11-13) |
 | ~~Turnstile site key / secret~~ | Done (2026-11-13). Secret rotation still open, see above |
 | Legal sign-off | `privacy.html`: remove the draft banner, set robots to `index, follow`, add the page to `sitemap.xml` |
