@@ -203,7 +203,8 @@ function handleNewsletter_(data) {
 // =============================================================================
 
 function verifyTurnstile_(token) {
-  const secret = PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET');
+  // trim(): a stray space or newline when pasting the secret breaks verification
+  const secret = String(PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET') || '').trim();
   if (!secret) {
     console.error('TURNSTILE_SECRET script property is not set.');
     return { ok: false, error: 'server_config', message: 'The form is not fully configured yet. Please email us directly.' };
@@ -227,8 +228,20 @@ function verifyTurnstile_(token) {
 
   if (result.success === true) return { ok: true };
 
+  const codes = (result['error-codes'] || []).join(',');
   console.warn('Turnstile verification failed:', JSON.stringify(result));
-  return { ok: false, error: 'captcha', message: 'The security check failed or expired. Please try again.' };
+
+  // Our configuration is wrong (e.g. secret not updated after rotation): not the visitor's fault
+  if (/invalid-input-secret|missing-input-secret/.test(codes)) {
+    return {
+      ok: false, error: 'server_config', detail: codes,
+      message: 'The form is temporarily unavailable on our side.'
+    };
+  }
+  return {
+    ok: false, error: 'captcha', detail: codes,
+    message: 'The security check failed or expired. Please try again.'
+  };
 }
 
 // =============================================================================
