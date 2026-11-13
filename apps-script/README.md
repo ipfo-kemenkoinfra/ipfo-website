@@ -96,7 +96,7 @@ Duplicate emails are not added twice.
 
 ## Notes and limits
 
-- **Spam protection:** hidden honeypot field `website` (rejected if filled) and Turnstile on the
+- **Spam protection:** hidden honeypot field `ipfo_hp` (rejected if filled; never name it something browsers autofill, like `website`) and Turnstile on the
   contact form. Newsletter forms use the honeypot only. Set `REQUIRE_TURNSTILE_FOR_NEWSLETTER = true`
   if you add a widget there. There is also a small per-email rate limit (5 per 10 minutes).
 - **Email quota:** Apps Script `MailApp` can send about 100 emails/day on a consumer Google account

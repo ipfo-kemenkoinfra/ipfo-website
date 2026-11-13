@@ -243,7 +243,7 @@ Cloudflare Turnstile site key are set once in **`js/config.js`**. Include it bef
     <input type="hidden" name="form_type" value="enquiry">
     <!-- form fields -->
     <div class="hp-field" aria-hidden="true">
-        <input type="text" name="website" tabindex="-1" autocomplete="off"> <!-- honeypot -->
+        <input type="text" name="ipfo_hp" tabindex="-1" autocomplete="off" aria-label="Leave this field empty"> <!-- honeypot -->
     </div>
     <div data-turnstile></div> <!-- optional: Turnstile widget -->
     <button type="submit">Submit</button>

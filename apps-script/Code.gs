@@ -27,8 +27,12 @@ const NOTIFY_EMAIL = 'sekretariat@ipfo.kemenkoinfra.go.id';
 const ENQUIRIES_SHEET = 'Enquiries';
 const SUBSCRIBERS_SHEET = 'Subscribers';
 
-/** Name of the hidden honeypot field. Must match the site (js/common.js). */
-const HONEYPOT_FIELD = 'website';
+/**
+ * Name of the hidden honeypot field. Must match the forms on the site.
+ * Deliberately meaningless: browsers autofill fields named e.g. "website",
+ * which would make real visitors look like bots.
+ */
+const HONEYPOT_FIELD = 'ipfo_hp';
 
 /**
  * Newsletter forms only use the honeypot (no Turnstile widget, to keep the
