@@ -39,6 +39,7 @@
 }
 
 .catalogue-content p {
+    text-wrap: pretty;
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 20px;
@@ -50,6 +51,7 @@
 }
 
 .catalogue-content li {
+    text-wrap: pretty;
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 12px;
