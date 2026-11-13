@@ -30,12 +30,25 @@ const IPFOContact = (function () {
                 .filter(p => p && p.id && p.name)
                 .sort((a, b) => String(a.name).localeCompare(String(b.name)));
 
+            // Group by sector group (optgroup) when available, otherwise a flat list
+            const groups = new Map();
             projects.forEach(project => {
-                const option = document.createElement('option');
-                option.value = project.id;
-                option.textContent = project.sector ? `${project.name} (${project.sector})` : project.name;
-                option.dataset.name = project.name;
-                projectSelect.appendChild(option);
+                const key = project.sectorGroup || '';
+                if (!groups.has(key)) groups.set(key, []);
+                groups.get(key).push(project);
+            });
+
+            Array.from(groups.keys()).sort().forEach(groupName => {
+                const parent = groupName ? document.createElement('optgroup') : projectSelect;
+                if (groupName) parent.label = groupName;
+                groups.get(groupName).forEach(project => {
+                    const option = document.createElement('option');
+                    option.value = project.id;
+                    option.textContent = project.sector ? `${project.name} (${project.sector})` : project.name;
+                    option.dataset.name = project.name;
+                    parent.appendChild(option);
+                });
+                if (parent !== projectSelect) projectSelect.appendChild(parent);
             });
         } catch (err) {
             // The dropdown is optional: without it the form still works.

@@ -1,23 +1,538 @@
 {
-  "_comment": "PLACEHOLDER DATA. Replace with the projects from the current catalogue Excel. Fields: id (stable, used in URLs like contact-us.html?type=interest&project=ID), name, sector, proposedBy.",
+  "_comment": "Projects in the current catalogue (Q4 2026), generated from Project_Catalogue_Q4_2026_extract_v04.xlsx (Catalogue tab). id is used in links like contact-us.html?type=interest&project=<id>; keep ids stable across editions.",
+  "edition": "2026-q4",
   "projects": [
     {
-      "id": "PLACEHOLDER-01",
-      "name": "[Placeholder] Example Toll Road Project",
-      "sector": "Transportation",
-      "proposedBy": "Example Ministry"
+      "id": "gilimanuk-mengwi-pekutatan-soka-mengwi-segment-toll-road",
+      "name": "Gilimanuk-Mengwi (Pekutatan-Soka-Mengwi Segment) Toll Road",
+      "sector": "Toll road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Public Works"
     },
     {
-      "id": "PLACEHOLDER-02",
-      "name": "[Placeholder] Example Water Supply System",
-      "sector": "Water",
-      "proposedBy": "Example Regional Government"
+      "id": "pejagan-cilacap-toll-road",
+      "name": "Pejagan-Cilacap Toll Road",
+      "sector": "Toll road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Public Works"
     },
     {
-      "id": "PLACEHOLDER-03",
-      "name": "[Placeholder] Example Waste-to-Energy Plant",
-      "sector": "Waste Management",
-      "proposedBy": "Example City Government"
+      "id": "supadio-airport-kijing-port-toll-road",
+      "name": "Supadio Airport - Kijing Port Toll Road",
+      "sector": "Toll road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "malang-kepanjen-toll-road",
+      "name": "Malang - Kepanjen Toll Road",
+      "sector": "Toll road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "gedebage-tasikmalaya-toll-road",
+      "name": "Gedebage - Tasikmalaya Toll Road",
+      "sector": "Toll road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "sentul-selatan-karawang-barat-toll-road",
+      "name": "Sentul Selatan - Karawang Barat Toll Road",
+      "sector": "Toll road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "semarang-harbour-semarang-kendal-toll-road",
+      "name": "Semarang Harbour (Semarang - Kendal) Toll Road",
+      "sector": "Toll road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "mini-hydro-cipanas-dam",
+      "name": "The Provision of 3.0 MW Mini Hydro Power Plant (MHPP) Infrastructure at Cipanas Dam",
+      "sector": "Mini hydro",
+      "sectorGroup": "Energy",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "mini-hydro-karalloe-dam",
+      "name": "The Provision of 4.5 MW Mini Hydro Power Plant (MHPP) Infrastructure at Karalloe Dam",
+      "sector": "Mini hydro",
+      "sectorGroup": "Energy",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "mini-hydro-kuwil-kawangkoan-dam",
+      "name": "The Provision of 2.5 MW Mini Hydro Power Plant (MHPP) Infrastructure at Kuwil Kawangkoan Dam",
+      "sector": "Mini hydro",
+      "sectorGroup": "Energy",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "mini-hydro-tapin-dam",
+      "name": "The Provision of 3.3 MW Mini Hydro Power Plant (MHPP) Infrastructure at Tapin Dam",
+      "sector": "Mini hydro",
+      "sectorGroup": "Energy",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "mini-hydro-leuwikeris-dam",
+      "name": "The Provision of 7.4 MW Mini Hydro Power Plant (MHPP) Infrastructure at Leuwikeris Dam",
+      "sector": "Mini hydro",
+      "sectorGroup": "Energy",
+      "proposedBy": "Ministry of Public Works"
+    },
+    {
+      "id": "karawaci-city",
+      "name": "Karawaci City",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "Ministry of Housing and Settlement Areas"
+    },
+    {
+      "id": "pasir-gadung-sky-village",
+      "name": "Pasir Gadung Sky Village",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "Ministry of Housing and Settlement Areas"
+    },
+    {
+      "id": "maja-green-living",
+      "name": "Maja Green Living",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "Ministry of Housing and Settlement Areas"
+    },
+    {
+      "id": "singkawang-airport-ppp-project",
+      "name": "Singkawang Airport PPP Project",
+      "sector": "Airport",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Transportation"
+    },
+    {
+      "id": "development-potential-for-purabaya-terminal",
+      "name": "Development Potential for Purabaya Terminal",
+      "sector": "Bus terminal & TOD",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Transportation"
+    },
+    {
+      "id": "development-of-betan-subing-terminal",
+      "name": "Development of Betan Subing Terminal",
+      "sector": "Bus terminal & TOD",
+      "sectorGroup": "Transport",
+      "proposedBy": "Ministry of Transportation"
+    },
+    {
+      "id": "samesta-alonia",
+      "name": "Samesta Alonia",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "samesta-parayasa",
+      "name": "Samesta Parayasa",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "blok-k-pulo-gebang",
+      "name": "Blok K Pulo Gebang",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "samesta-casanamora",
+      "name": "Samesta Casanamora",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "kebon-kacang-urban-renewal",
+      "name": "Kebon Kacang Urban Renewal",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "klender-apartment-revitalization",
+      "name": "Klender Apartment Revitalization",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "kota-mandiri-bekala",
+      "name": "Kota Mandiri Bekala",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "samesta-jonggol",
+      "name": "Samesta Jonggol",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "tanah-abang-urban-renewal",
+      "name": "Tanah Abang Urban Renewal",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "kemayoran-blok-a8-urban-renewal",
+      "name": "Kemayoran Blok A8 Urban Renewal",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "maja-banten",
+      "name": "Maja - Banten",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "samesta-green-view",
+      "name": "Samesta Green View",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "revitalization-of-pasar-jumat-flats-tod-lebak-bulus",
+      "name": "Revitalization of Pasar Jumat Flats - TOD Lebak Bulus",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "samesta-taroada",
+      "name": "Samesta Taroada",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "samesta-driyorejo-gresik",
+      "name": "Samesta Driyorejo - Gresik",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "tod-based-residential-development-in-jurang-mangu",
+      "name": "TOD Based Residential Development in Jurang Mangu",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "revitalization-of-ilir-barat-housing",
+      "name": "Revitalization of Ilir Barat Housing",
+      "sector": "Housing",
+      "sectorGroup": "Property",
+      "proposedBy": "National Housing Corporation (Perumnas)"
+    },
+    {
+      "id": "halim-superblock-mixed-use-development-at-halim-whoosh",
+      "name": "Halim Superblock: Mixed-Use Development at Halim Whoosh Station",
+      "sector": "Mixed-use TOD",
+      "sectorGroup": "Property",
+      "proposedBy": "PT KCIC"
+    },
+    {
+      "id": "mixed-use-development-and-park-ride-lebak-bulus",
+      "name": "Mixed-Use Development And Park & Ride Lebak Bulus",
+      "sector": "Mixed-use TOD",
+      "sectorGroup": "Property",
+      "proposedBy": "PT MRT Jakarta"
+    },
+    {
+      "id": "xgl-mixed-use-development-glodok",
+      "name": "XGL Mixed-Use Development Glodok",
+      "sector": "Mixed-use TOD",
+      "sectorGroup": "Property",
+      "proposedBy": "PT MRT Jakarta"
+    },
+    {
+      "id": "the-heritage-hub-kali-besar-kota-tua",
+      "name": "The Heritage Hub Kali Besar: Kota Tua",
+      "sector": "Mixed-use TOD",
+      "sectorGroup": "Property",
+      "proposedBy": "PT MRT Jakarta"
+    },
+    {
+      "id": "combined-building-glodok",
+      "name": "Combined Building Glodok",
+      "sector": "Mixed-use TOD",
+      "sectorGroup": "Property",
+      "proposedBy": "PT MRT Jakarta"
+    },
+    {
+      "id": "bali-tramway-development-i-gusti-ngurah-rai-airport-kuta",
+      "name": "Bali Tramway Development: I Gusti Ngurah Rai Airport-Kuta-Legian-Canggu Corridor",
+      "sector": "Urban rail (tram)",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Kereta Api Indonesia"
+    },
+    {
+      "id": "development-of-the-lubuk-tutung-muara-wahau-coal-freight",
+      "name": "Development of the Lubuk Tutung-Muara Wahau Coal Freight Railway Corridor in East Kalimantan Province",
+      "sector": "Freight rail",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Kereta Api Indonesia"
+    },
+    {
+      "id": "jabodetabek-commuter-rail-capacity-enhancement",
+      "name": "Jabodetabek Commuter Rail Capacity Enhancement",
+      "sector": "Commuter rail",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Kereta Api Indonesia"
+    },
+    {
+      "id": "bandung-raya-railway-transformation-route-padalarang",
+      "name": "Bandung Raya Railway Transformation Route Padalarang - Cicalengka",
+      "sector": "Commuter rail",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Kereta Api Indonesia"
+    },
+    {
+      "id": "cawang-central-hub-phase-2",
+      "name": "Cawang Central Hub Phase 2",
+      "sector": "Transit hub & TOD",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Transportasi Jakarta"
+    },
+    {
+      "id": "green-hub-petamburan",
+      "name": "Green Hub Petamburan",
+      "sector": "Transit hub & park",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Transportasi Jakarta"
+    },
+    {
+      "id": "bali-maritime-tourism-hub-development-area-i-ap-i-bmth",
+      "name": "Bali Maritime Tourism Hub - Development Area I (AP I BMTH)",
+      "sector": "Marina & tourism area",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "PT Pelabuhan Indonesia"
+    },
+    {
+      "id": "makassar-new-port",
+      "name": "Makassar New Port",
+      "sector": "Port",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Pelabuhan Indonesia"
+    },
+    {
+      "id": "kuala-tanjung-port-industrial-estate-ktpie",
+      "name": "Kuala Tanjung Port & Industrial Estate (KTPIE)",
+      "sector": "Port & industrial estate",
+      "sectorGroup": "Transport",
+      "proposedBy": "PT Pelabuhan Indonesia"
+    },
+    {
+      "id": "jakarta-bay-giant-sea-wall-gsw",
+      "name": "Jakarta Bay Giant Sea Wall (GSW)",
+      "sector": "Coastal protection & area development",
+      "sectorGroup": "Water & Waste",
+      "proposedBy": "Badan Otorita Pengelola Pantai Utara Jawa"
+    },
+    {
+      "id": "lrt-jakarta-kelapa-gading-jakarta-international-stadium-jis",
+      "name": "LRT Jakarta: Kelapa Gading - Jakarta International Stadium (JIS)",
+      "sector": "Urban rail (LRT)",
+      "sectorGroup": "Transport",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "itf-sunter-intermediate-treatment-facility",
+      "name": "ITF Sunter (Intermediate Treatment Facility)",
+      "sector": "Waste-to-energy",
+      "sectorGroup": "Water & Waste",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "jakarta-sewerage-system-zone-2",
+      "name": "Jakarta Sewerage System Zone 2",
+      "sector": "Wastewater (sewerage)",
+      "sectorGroup": "Water & Waste",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "jakarta-sewerage-system-zone-7",
+      "name": "Jakarta Sewerage System Zone 7",
+      "sector": "Wastewater (sewerage)",
+      "sectorGroup": "Water & Waste",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "jakarta-sewerage-system-zone-8",
+      "name": "Jakarta Sewerage System Zone 8",
+      "sector": "Wastewater (sewerage)",
+      "sectorGroup": "Water & Waste",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "reclamation-marunda-industrial-estate",
+      "name": "Reclamation Marunda Industrial Estate",
+      "sector": "Industrial estate",
+      "sectorGroup": "Property",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "sudirman-gateway-dukuh-atas-tod",
+      "name": "Sudirman Gateway (Dukuh Atas TOD)",
+      "sector": "Station retail (TOD)",
+      "sectorGroup": "Property",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "intercity-point-jatibaru-tanah-abang-tod",
+      "name": "Intercity Point Jatibaru (Tanah Abang TOD)",
+      "sector": "Mixed-use TOD",
+      "sectorGroup": "Property",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "lrt-city-ciracas",
+      "name": "LRT City Ciracas",
+      "sector": "Mixed-use TOD",
+      "sectorGroup": "Property",
+      "proposedBy": "DKI Jakarta Provincial Government"
+    },
+    {
+      "id": "mini-hydro-sidan-dam",
+      "name": "The Provision of 0.65 MW Mini Hydro Power Plant Infrastructure at Sidan Dam",
+      "sector": "Mini hydro",
+      "sectorGroup": "Energy",
+      "proposedBy": "Bali Provincial Government"
+    },
+    {
+      "id": "mahendradatta-sunset-road-improvement-project",
+      "name": "Mahendradatta-Sunset Road Improvement Project",
+      "sector": "Road",
+      "sectorGroup": "Transport",
+      "proposedBy": "Bali Provincial Government"
+    },
+    {
+      "id": "bandung-metropolitan-urban-railway",
+      "name": "Bandung Metropolitan Urban Railway",
+      "sector": "Urban rail (LRT)",
+      "sectorGroup": "Transport",
+      "proposedBy": "West Java Provincial Government"
+    },
+    {
+      "id": "spam-regional-metropolitan-cirebon-raya-jatigede-phase-i",
+      "name": "SPAM Regional Metropolitan Cirebon Raya (Jatigede) Phase I",
+      "sector": "Water supply",
+      "sectorGroup": "Water & Waste",
+      "proposedBy": "West Java Provincial Government"
+    },
+    {
+      "id": "greater-solo-urban-public-transportation",
+      "name": "Greater Solo Urban Public Transportation",
+      "sector": "Urban bus (BRT)",
+      "sectorGroup": "Transport",
+      "proposedBy": "Central Java Provincial Government"
+    },
+    {
+      "id": "kembang-public-terminal-port-of-jepara",
+      "name": "Kembang Public Terminal, Port of Jepara",
+      "sector": "Port",
+      "sectorGroup": "Transport",
+      "proposedBy": "Central Java Provincial Government"
+    },
+    {
+      "id": "industrial-designated-area-kpi-of-jepara-regency",
+      "name": "Industrial Designated Area (KPI) of Jepara Regency",
+      "sector": "Industrial estate",
+      "sectorGroup": "Property",
+      "proposedBy": "Central Java Provincial Government"
+    },
+    {
+      "id": "salatiga-geriatric-wellness-and-senior-living",
+      "name": "Salatiga Geriatric Wellness and Senior Living",
+      "sector": "Senior living & geriatric care",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "Central Java Provincial Government"
+    },
+    {
+      "id": "moyudan-tourism-village-slemans-educational-creative-tourism",
+      "name": "Moyudan Tourism Village: Sleman’s Educational & Creative Tourism",
+      "sector": "Tourism",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "D.I. Yogyakarta Provincial Government"
+    },
+    {
+      "id": "sidoagung-integrated-economic-zone-furniture-craft-msme-hub",
+      "name": "Sidoagung Integrated Economic Zone: Furniture, Craft & MSME Hub",
+      "sector": "Economic zone",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "D.I. Yogyakarta Provincial Government"
+    },
+    {
+      "id": "sendangarum-nature-based-tourist-area-agrotourism-in-minggir",
+      "name": "Sendangarum Nature-based Tourist Area: Agrotourism in Minggir",
+      "sector": "Tourism",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "D.I. Yogyakarta Provincial Government"
+    },
+    {
+      "id": "tmf-bokoharjo-creative-plaza-multifunctional-transit",
+      "name": "TMF Bokoharjo: Creative Plaza & Multifunctional Transit, Prambanan",
+      "sector": "Tourism & transit plaza",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "D.I. Yogyakarta Provincial Government"
+    },
+    {
+      "id": "turi-harvest-and-agropark-fruit-picking-agrotourism",
+      "name": "Turi Harvest and Agropark: Fruit-Picking Agrotourism",
+      "sector": "Tourism",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "D.I. Yogyakarta Provincial Government"
+    },
+    {
+      "id": "jombor-type-b-bus-terminal",
+      "name": "Jombor Type B Bus Terminal",
+      "sector": "Bus terminal",
+      "sectorGroup": "Transport",
+      "proposedBy": "D.I. Yogyakarta Provincial Government"
+    },
+    {
+      "id": "kanjuruhan-regional-general-hospital-health-sector",
+      "name": "Kanjuruhan Regional General Hospital: Health Sector",
+      "sector": "Hospital",
+      "sectorGroup": "Social & Tourism",
+      "proposedBy": "East Java Provincial Government"
+    },
+    {
+      "id": "lamongan-street-lighting",
+      "name": "Lamongan Street Lighting",
+      "sector": "Street lighting",
+      "sectorGroup": "Energy",
+      "proposedBy": "East Java Provincial Government"
+    },
+    {
+      "id": "manggar-waste-management-project-in-balikpapan-city-east",
+      "name": "Manggar Waste Management Project in Balikpapan City, East Kalimantan",
+      "sector": "Waste-to-energy",
+      "sectorGroup": "Water & Waste",
+      "proposedBy": "East Kalimantan Provincial Government"
     }
   ]
 }
