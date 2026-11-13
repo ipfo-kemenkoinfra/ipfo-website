@@ -9,7 +9,7 @@
 
 .contact-container {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
     gap: 60px;
     align-items: start;
     animation: fadeInUp 0.8s ease-out;
@@ -109,6 +109,11 @@
 .contact-text p {
     margin: 0;
     opacity: 0.9;
+}
+
+.contact-text {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .contact-text a {
@@ -330,7 +335,7 @@
     }
 
     .contact-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 40px;
     }
 

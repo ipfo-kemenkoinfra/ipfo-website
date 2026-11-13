@@ -310,10 +310,11 @@ function initTurnstile() {
     window.ipfoTurnstileLoaded = function () {
         slots.forEach(slot => {
             try {
+                // The normal widget needs at least 300px; use the compact one on narrow phones
                 slot.dataset.widgetId = window.turnstile.render(slot, {
                     sitekey: siteKey,
                     theme: 'light',
-                    size: 'flexible'
+                    size: (slot.parentElement || slot).clientWidth < 300 ? 'compact' : 'flexible'
                 });
             } catch (err) {
                 console.error('Turnstile render failed:', err);
