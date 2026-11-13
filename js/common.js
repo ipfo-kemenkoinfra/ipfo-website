@@ -260,7 +260,9 @@ function handleFormSubmission(formId, statusElementId, successMessage = 'Thank y
                 form.reset();
                 if (typeof options.onSuccess === 'function') options.onSuccess(payload, form);
             } else {
-                const message = (data && data.message) || 'Sorry, there was a problem sending your message.';
+                let message = (data && data.message) || 'Sorry, there was a problem sending your message.';
+                // Show the server's diagnostic code (e.g. Cloudflare error-codes) to make support easier
+                if (data && (data.detail || data.error)) message += ` (code: ${data.detail || data.error})`;
                 setFormStatus(statusElement, 'error',
                     emailFallbackHtml(escapeHtmlText(message), 'If this keeps happening, email us at'), true);
             }
