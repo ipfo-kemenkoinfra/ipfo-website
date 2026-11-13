@@ -1,6 +1,6 @@
 # Handoff: facilitation channel + catalogue redo (Nov 2026)
 
-Status as of 2026-11-12. Work is on branch `dev`; nothing merged to `main`.
+Status as of 2026-11-13. Work is on branch `dev`; nothing merged to `main`.
 Delete this file once every open item below is closed.
 
 ## What was done (commits on `dev`)
@@ -14,6 +14,23 @@ Delete this file once every open item below is closed.
 | Move contact form to Apps Script | `js/config.js`, `js/contact.js`, rewritten `handleFormSubmission` in `js/common.js`, `assets/data/projects.json` |
 | Point newsletter forms at Apps Script | blog + article sidebar; Formspree fully removed |
 | Update sitemap lastmod | 2026-11-12 |
+| Make edition permalink a 'Copy link' button | copies `#<id>` link with "Copied!" feedback |
+| Set real Cloudflare Turnstile site key | real key on the live sites, test key on localhost |
+| Form endpoint set to the Apps Script web app | `FORM_ENDPOINT` in `js/config.js` |
+
+## Live services (set up 2026-11-13). All forms are working end to end.
+
+- **Google Sheet:** "IPFO Website Enquiries" (tabs: Enquiries, Subscribers), owned by the IPFO Google
+  account. The Apps Script is bound to it. Viewer access is shared with kreitonstrs@gmail.com.
+- **Apps Script web app:** deployed (Execute as: Me, Access: Anyone). To change the code, use Manage
+  deployments → edit → **New version**, which keeps the same URL.
+- **Cloudflare Turnstile:** widget "IPFO website". Hostnames: `ipfo.kemenkoinfra.go.id`,
+  `ipfo-kemenkoinfra.github.io`. Mode: Managed.
+- **Verified on the dev site:** real enquiries land in the Sheet with the project id and name; the
+  notification email reaches sekretariat@; the newsletter writes to Subscribers; honeypot, validation
+  and fake Turnstile tokens are rejected. The test rows have been deleted.
+- **Gotcha:** opening Apps Script fails with "Sorry, unable to open the file" when the browser is signed
+  in to several Google accounts. Use a private window or a browser profile with only the IPFO account.
 
 ## How things fit together
 
@@ -34,7 +51,16 @@ Delete this file once every open item below is closed.
 - [ ] **Noscript link:** the `<noscript>` block in `project-catalogue.html` hard-codes
       `assets/project-catalogue/2026-q4/catalogue.pdf`. It's the one HTML touch per new edition, unless a
       stable path convention is adopted.
+- [ ] **Rotate the Turnstile secret** (it was shown in a chat screenshot): Cloudflare → widget → Settings →
+      Rotate secret key, then update `TURNSTILE_SECRET` in Script Properties. Afterwards, re-test one enquiry.
 - [ ] **Privacy retention:** the "2 years" for enquiries in `privacy.html` is a proposal; legal to confirm.
+
+## Remaining before going live (in order)
+
+1. Catalogue files and dates (table below), then the project list from the catalogue Excel.
+2. Legal sign-off on `privacy.html`.
+3. Rotate the Turnstile secret.
+4. Final check on the dev site, delete this file, then merge `dev` into `main` (done by the owner, not Claude).
 
 ## Still to supply (and where)
 
@@ -45,9 +71,8 @@ Delete this file once every open item below is closed.
 | Q4 2026 release date, Kepmenko | `"releaseDate"`, `"kepmenko"` in `editions.json` |
 | Q2 2025 PDF | `"pdf"` of `2025-q2` in `editions.json` |
 | Project list | `assets/data/projects.json` (replace the 3 `PLACEHOLDER-*` entries from the catalogue Excel) |
-| Apps Script URL | `FORM_ENDPOINT` in `js/config.js` (follow `apps-script/README.md`) |
-| ~~Turnstile site key~~ | Done (2026-11-13). Secret to be rotated, since it was shared in chat |
-| Turnstile secret | Apps Script → Project Settings → Script Properties → `TURNSTILE_SECRET` |
+| ~~Apps Script URL~~ | Done (2026-11-13) |
+| ~~Turnstile site key / secret~~ | Done (2026-11-13). Secret rotation still open, see above |
 | Legal sign-off | `privacy.html`: remove the draft banner, set robots to `index, follow`, add the page to `sitemap.xml` |
 
 ## Testing notes
@@ -55,7 +80,7 @@ Delete this file once every open item below is closed.
 - Local: run `python3 -m http.server 8080` in the repo root, then open http://127.0.0.1:8080/
 - Verified with headless Chromium: catalogue default/anchor/no-JS views; placeholder, success and error
   form paths (mocked endpoint); 375px with no horizontal scroll; no JS errors.
-- Apps Script logic was tested in Node with mocked Google services, not yet in real Apps Script.
+- Apps Script: tested in Node with mocks, then end to end on the dev site (2026-11-13).
 - Blog post images (imgur) return 403 on localhost. That's not from these changes.
-- After deploying Apps Script: send one real enquiry and one newsletter sign-up from the GitHub Pages
-  preview, then check the sheet rows and the notification email.
+- Locally, forms use the Turnstile test key, so the real Apps Script rejects them (captcha). Test real
+  submissions on the dev GitHub Pages site.
