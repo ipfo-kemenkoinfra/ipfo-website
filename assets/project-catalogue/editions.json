@@ -3,12 +3,12 @@
     {
       "id": "2026-q4",
       "label": "Q4 2026",
-      "releaseDate": null,
-      "cover": "assets/project-catalogue/2026-q4/cover-placeholder.svg",
-      "pdf": "",
+      "releaseDate": "2026-11-13",
+      "cover": "assets/project-catalogue/2026-q4/cover.jpg",
+      "pdf": "assets/project-catalogue/2026-q4/catalogue.pdf",
       "kepmenko": "",
       "current": true,
-      "note": ""
+      "note": "Issued with Coordinating Minister for Infrastructure and Regional Development Decree No. 102/S of 2026."
     },
     {
       "id": "2025-q4",
@@ -25,7 +25,7 @@
       "label": "Q2 2025",
       "releaseDate": "2025-06",
       "cover": "assets/project-catalogue/2025-q2/cover.png",
-      "pdf": "",
+      "pdf": "assets/project-catalogue/2025-q2/catalogue.pdf",
       "kepmenko": "",
       "current": false,
       "note": ""
